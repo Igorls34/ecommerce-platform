@@ -10,7 +10,7 @@ export const brand = {
   legalName: 'Minha Loja LTDA',
   tagline: 'Produtos selecionados com qualidade.',
   domain: 'exemplo.com.br',
-  storeUrl: 'https://exemplo.com.br',
+  storeUrl: 'http://localhost:5600',
   adminUrl: 'https://admin.exemplo.com.br',
   apiUrl: 'https://api.exemplo.com.br',
 

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -15,6 +15,8 @@ export default function App() {
       <Navbar />
       <main className="flex-grow-1">
         <Routes>
+          <Route path="/loja" element={<Navigate to="/" replace />} />
+          <Route path="/loja/*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/produtos" element={<ProductsPage />} />
           <Route path="/produto/:id" element={<ProductPage />} />

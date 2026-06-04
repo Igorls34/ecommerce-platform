@@ -3,13 +3,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const ProductsPage = lazy(() => import('./pages/ProductsPage'));
-const ProductPage = lazy(() => import('./pages/ProductPage'));
-const CartPage = lazy(() => import('./pages/CartPage'));
-const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
-const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'));
-const AccountPage = lazy(() => import('./pages/AccountPage'));
+const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const ProductPage = lazy(() => import('./pages/ProductPage').then(m => ({ default: m.ProductPage })));
+const CartPage = lazy(() => import('./pages/CartPage').then(m => ({ default: m.CartPage })));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage').then(m => ({ default: m.CheckoutPage })));
+const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage').then(m => ({ default: m.OrderConfirmationPage })));
+const AccountPage = lazy(() => import('./pages/AccountPage').then(m => ({ default: m.AccountPage })));
 
 const Loading = () => (
   <div className="d-flex justify-content-center align-items-center" style={{ minHeight: 300 }}>

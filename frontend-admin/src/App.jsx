@@ -1,15 +1,15 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const AdminLayout = lazy(() => import('./components/AdminLayout'));
-const DashboardPage = lazy(() => import('./pages/DashboardPage'));
-const ProductsPage = lazy(() => import('./pages/ProductsPage'));
-const ProductFormPage = lazy(() => import('./pages/ProductFormPage'));
-const CategoriesPage = lazy(() => import('./pages/CategoriesPage'));
-const OrdersPage = lazy(() => import('./pages/OrdersPage'));
-const OrderDetailPage = lazy(() => import('./pages/OrderDetailPage'));
-const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const AdminLayout = lazy(() => import('./components/AdminLayout').then(m => ({ default: m.AdminLayout })));
+const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const ProductFormPage = lazy(() => import('./pages/ProductFormPage').then(m => ({ default: m.ProductFormPage })));
+const CategoriesPage = lazy(() => import('./pages/CategoriesPage').then(m => ({ default: m.CategoriesPage })));
+const OrdersPage = lazy(() => import('./pages/OrdersPage').then(m => ({ default: m.OrdersPage })));
+const OrderDetailPage = lazy(() => import('./pages/OrderDetailPage').then(m => ({ default: m.OrderDetailPage })));
+const SettingsPage = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
 
 const Loading = () => (
   <div className="d-flex justify-content-center align-items-center" style={{ minHeight: 300 }}>

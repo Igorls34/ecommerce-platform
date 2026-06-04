@@ -110,7 +110,7 @@ export class MelhorEnvioLabelService {
   private readonly apiUrl =
     process.env.MELHOR_ENVIO_API_URL || 'https://sandbox.melhorenvio.com.br/api/v2/me';
   private readonly userAgent =
-    process.env.MELHOR_ENVIO_USER_AGENT || 'Thessara-Store/1.0 (thessarasemijoias@gmail.com)';
+    process.env.MELHOR_ENVIO_USER_AGENT || 'MinhaLoja-Store/1.0 (contato@exemplo.com.br)';
   private readonly fromAddress = this.buildFromAddress();
   private readonly defaultWeight = Number(process.env.STORE_WEIGHT) || 0.5;
   private readonly defaultLength = Number(process.env.STORE_LENGTH) || 20;
@@ -404,9 +404,9 @@ export class MelhorEnvioLabelService {
 
   private buildFromAddress(): ShipmentAddress {
     return this.cleanAddress({
-      name: process.env.STORE_SENDER_NAME || 'Thessara',
+      name: process.env.STORE_SENDER_NAME || 'Minha Loja',
       phone: process.env.STORE_SENDER_PHONE || '',
-      email: process.env.STORE_SENDER_EMAIL || 'thessarasemijoias@gmail.com',
+      email: process.env.STORE_SENDER_EMAIL || 'contato@exemplo.com.br',
       document: this.onlyDigits(process.env.STORE_SENDER_DOCUMENT || ''),
       company_document: this.onlyDigits(process.env.STORE_SENDER_COMPANY_DOCUMENT || ''),
       state_register: process.env.STORE_SENDER_STATE_REGISTER || '',

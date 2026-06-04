@@ -167,7 +167,7 @@ export function paymentConfirmedCustomerTemplate(data: EmailOrderTemplateData): 
 
 export function paymentConfirmedAdminTemplate(data: EmailOrderTemplateData): EmailTemplateResult {
   const subject = `Pagamento aprovado - separar pedido ${data.orderNumber}`;
-  const intro = `Novo pedido pago na loja Thessara.\n\nEste pedido já teve o pagamento confirmado e pode entrar no fluxo de separação.`;
+  const intro = `Novo pedido pago na loja ${BRAND_NAME}.`;
   const rows = [
     { label: 'Pedido', value: data.orderNumber },
     { label: 'Cliente', value: data.customerName || '-' },
@@ -285,7 +285,7 @@ export function paymentExpiredCustomerTemplate(data: EmailOrderTemplateData): Em
 }
 
 export function passwordResetTemplate(resetUrl: string): EmailTemplateResult {
-  const subject = 'Recupere sua senha - Thessara';
+  const subject = `Recupere sua senha - ${BRAND_NAME}`;
   const intro =
     'Recebemos uma solicitação para redefinir sua senha.\n\nClique no botão abaixo para criar uma nova senha. Se você não solicitou isso, ignore este e-mail.';
   const button = { label: 'Redefinir senha', url: resetUrl };

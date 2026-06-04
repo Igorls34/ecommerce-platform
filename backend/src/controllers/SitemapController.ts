@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { prisma } from '../lib/prisma';
 
-const SITE_URL = 'https://thessarasemijoias.com.br';
+const SITE_URL = 'https://exemplo.com.br';
 
 function xmlUrl(loc: string, changefreq: string, priority: string, lastmod?: string) {
   return [

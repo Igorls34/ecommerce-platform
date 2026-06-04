@@ -318,7 +318,7 @@ export class MelhorEnvioAuthService {
           'Content-Type': 'application/json',
           'User-Agent':
             process.env.MELHOR_ENVIO_USER_AGENT ||
-            'Thessara-Store/1.0 (thessarasemijoias@gmail.com)',
+            'MinhaLoja-Store/1.0 (contato@exemplo.com.br)',
         },
         body: JSON.stringify({
           grant_type: 'refresh_token',

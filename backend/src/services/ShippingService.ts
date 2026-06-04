@@ -32,7 +32,7 @@ export class ShippingService {
   private readonly apiUrl =
     process.env.MELHOR_ENVIO_API_URL || 'https://sandbox.melhorenvio.com.br/api/v2/me';
   private readonly userAgent =
-    process.env.MELHOR_ENVIO_USER_AGENT || 'Thessara-Store/1.0 (thessarasemijoias@gmail.com)';
+    process.env.MELHOR_ENVIO_USER_AGENT || 'MinhaLoja-Store/1.0 (contato@exemplo.com.br)';
   private readonly originZipCode = process.env.STORE_ZIP_CODE || '27250247';
   private readonly defaultWeight = Number(process.env.STORE_WEIGHT) || 0.5;
   private readonly defaultLength = Number(process.env.STORE_LENGTH) || 20;

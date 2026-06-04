@@ -138,7 +138,7 @@ export function SettingsPage() {
               settings={settings}
               onChange={updateField}
               rows={[
-                [f('adminOrderEmail', 'E-mail do lojista', { type: 'email', placeholder: 'admin@thessarasemijoias.com.br', hint: 'Recebe alertas de pedidos pagos e notificações.' })],
+                [f('adminOrderEmail', 'E-mail do lojista', { type: 'email', placeholder: 'admin@exemplo.com.br', hint: 'Recebe alertas de pedidos pagos e notificações.' })],
               ]}
             />
             <SettingsSection
@@ -148,8 +148,8 @@ export function SettingsPage() {
               onChange={updateField}
               rows={[
                 [
-                  f('mailFrom', 'E-mail remetente', { type: 'email', placeholder: 'contato@thessarasemijoias.com.br' }),
-                  f('mailFromName', 'Nome remetente', { type: 'text', placeholder: 'Thessara' }),
+                  f('mailFrom', 'E-mail remetente', { type: 'email', placeholder: 'contato@exemplo.com.br' }),
+                  f('mailFromName', 'Nome remetente', { type: 'text', placeholder: 'Minha Loja' }),
                 ],
               ]}
             />
@@ -162,8 +162,8 @@ export function SettingsPage() {
             onChange={updateField}
             rows={[
               [
-                f('storeBaseUrl', 'URL da loja', { type: 'url', placeholder: 'https://thessarasemijoias.com.br' }),
-                f('adminBaseUrl', 'URL do admin', { type: 'url', placeholder: 'https://admin.thessarasemijoias.com.br' }),
+                f('storeBaseUrl', 'URL da loja', { type: 'url', placeholder: 'https://exemplo.com.br' }),
+                f('adminBaseUrl', 'URL do admin', { type: 'url', placeholder: 'https://admin.exemplo.com.br' }),
               ],
             ]}
           />
@@ -175,12 +175,12 @@ export function SettingsPage() {
             onChange={updateField}
             rows={[
               [
-                f('senderName', 'Nome / Razão social', { placeholder: 'Thessara Semijoias' }),
+                f('senderName', 'Nome / Razão social', { placeholder: 'Minha Loja' }),
                 f('senderDocument', 'CPF/CNPJ', { placeholder: '000.000.000-00' }),
               ],
               [
                 f('senderPhone', 'Telefone', { placeholder: '(11) 99999-9999' }),
-                f('senderEmail', 'E-mail', { type: 'email', placeholder: 'contato@thessarasemijoias.com.br' }),
+                f('senderEmail', 'E-mail', { type: 'email', placeholder: 'contato@exemplo.com.br' }),
               ],
               [
                 f('senderAddress', 'Logradouro', { placeholder: 'Rua Exemplo' }),
@@ -230,7 +230,7 @@ export function SettingsPage() {
                     f('pixMerchantCity', 'Cidade', { placeholder: 'São Paulo' }),
                   ],
                   [
-                    f('pixMerchantName', 'Nome do recebedor', { placeholder: 'Thessara Semijoias' }),
+                    f('pixMerchantName', 'Nome do recebedor', { placeholder: 'Minha Loja' }),
                     { key: 'spacer', label: '' },
                   ],
                 ]}
@@ -250,7 +250,7 @@ export function SettingsPage() {
             onChange={updateField}
             rows={[
               [
-                f('companyName', 'Razão social', { placeholder: 'Thessara Semijoias Ltda' }),
+                f('companyName', 'Razão social', { placeholder: 'Minha Loja LTDA' }),
                 f('companyCnpj', 'CNPJ', { placeholder: '00.000.000/0001-00' }),
               ],
               [

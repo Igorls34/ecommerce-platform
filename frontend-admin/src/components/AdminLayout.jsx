@@ -1,174 +1,40 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-
-import { AdminNotificationsBell } from './AdminNotificationsBell';
-import { useConfirmDialog } from './ConfirmDialog';
-import { clearAdminToken } from '../lib/auth';
-import { brandAssets } from '../lib/brandAssets';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { isAuthenticated, clearAdminToken } from '../lib/auth';
 import { brand } from '../lib/brandAssets';
-import { getAdminNotifications } from '../services/api';
+import { useEffect, useState } from 'react';
 
-const STORE_PUBLIC_URL = (import.meta.env.VITE_STORE_PUBLIC_URL || 'http://localhost:5600').replace(
-  /\/$/,
-  '',
-);
-
-const PAGE_HEADER_TONES = [
-  { match: 'dashboard', className: 'is-dashboard' },
-  { match: 'categoria', className: 'is-categories' },
-  { match: 'produto', className: 'is-products' },
-  { match: 'pedido', className: 'is-orders' },
-  { match: 'aviso', className: 'is-alerts' },
-  { match: 'cliente', className: 'is-customers' },
-];
-
-export function AdminLayout({ title, subtitle, actions, children }) {
+export function AdminLayout() {
+  const location = useLocation();
   const navigate = useNavigate();
-  const { confirm, confirmDialog } = useConfirmDialog();
-  const titleInitial = title?.trim()?.charAt(0)?.toUpperCase() || 'T';
-  const headerTone =
-    PAGE_HEADER_TONES.find((tone) => title?.toLowerCase().includes(tone.match))?.className ||
-    'is-default';
-  const [notificationsPayload, setNotificationsPayload] = useState({
-    counts: { total: 0, danger: 0, warning: 0 },
-    notifications: [],
-  });
-  const [notificationsError, setNotificationsError] = useState('');
-  const [notificationsLoading, setNotificationsLoading] = useState(false);
-  const latestNotificationId = useRef('');
+  const [auth, setAuth] = useState(isAuthenticated());
 
   useEffect(() => {
-    let active = true;
-    let timerId;
+    if (!isAuthenticated()) navigate('/entrar', { replace: true });
+    setAuth(isAuthenticated());
+  }, [location]);
 
-    async function loadNotifications() {
-      setNotificationsLoading(true);
-
-      try {
-        const payload = await getAdminNotifications();
-
-        if (!active) {
-          return;
-        }
-
-        const latestNotification = payload.notifications?.[0] || null;
-        const latestId = latestNotification?.id || '';
-
-        setNotificationsPayload(payload);
-        setNotificationsError('');
-
-        latestNotificationId.current = latestId;
-      } catch (requestError) {
-        if (active) {
-          setNotificationsError(requestError.message || 'Não foi possível carregar alertas.');
-        }
-      } finally {
-        if (active) {
-          setNotificationsLoading(false);
-        }
-      }
-    }
-
-    loadNotifications();
-    timerId = window.setInterval(loadNotifications, 30000);
-
-    return () => {
-      active = false;
-      window.clearInterval(timerId);
-    };
-  }, []);
-
-  const headerActions = useMemo(
-    () => (
-      <>
-        {actions}
-        <AdminNotificationsBell
-          payload={notificationsPayload}
-          error={notificationsError}
-          isLoading={notificationsLoading}
-        />
-      </>
-    ),
-    [actions, notificationsError, notificationsLoading, notificationsPayload],
-  );
-
-  async function handleLogout() {
-    const confirmed = await confirm({
-      title: 'Sair do painel?',
-      message: 'Você será desconectado do painel administrativo.',
-      confirmLabel: 'Sair',
-      cancelLabel: 'Continuar aqui',
-      tone: 'warning',
-    });
-
-    if (!confirmed) {
-      return;
-    }
-
-    clearAdminToken();
-    navigate('/', { replace: true });
-  }
+  if (!auth) return null;
 
   return (
-    <div className="app-shell">
-       <aside className="sidebar" style={{ background: '#111', color: '#fff' }}>
-        <div className="brand-block">
-          <img src={brandAssets.logo} alt={brand.name} style={{ width: 40, height: 40 }} />
-          <h1 className="brand-title" style={{ color: '#fff' }}>{brand.name}</h1>
+    <div className="d-flex">
+      <aside className="sidebar">
+        <div className="sidebar-logo">
+          <svg width="32" height="32" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#333"/><path d="M10 20l5-7 4 5 7-9 7 11H10z" fill="#fff" opacity="0.9"/><circle cx="18" cy="13" r="2" fill="#fff" opacity="0.7"/></svg>
+          <span>{brand.name}</span>
         </div>
-
-        <nav className="sidebar-nav">
-          <NavLink to="/dashboard" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Dashboard</strong>
-          </NavLink>
-          <NavLink to="/categorias" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Categorias</strong>
-          </NavLink>
-          <NavLink to="/produtos" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Produtos</strong>
-          </NavLink>
-          <NavLink to="/pedidos" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Pedidos</strong>
-          </NavLink>
-          <NavLink to="/avisos" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Avisos</strong>
-          </NavLink>
-          <NavLink to="/clientes" className={({ isActive }) => navLinkClassName(isActive)}>
-            <strong>Clientes</strong>
-          </NavLink>
-        </nav>
-
+        <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link>
+        <Link to="/pedidos" className={location.pathname.startsWith('/pedidos') ? 'active' : ''}>Pedidos</Link>
+        <Link to="/produtos" className={location.pathname.startsWith('/produtos') ? 'active' : ''}>Produtos</Link>
+        <Link to="/categorias" className={location.pathname.startsWith('/categorias') ? 'active' : ''}>Categorias</Link>
+        <Link to="/configuracoes" className={location.pathname.startsWith('/configuracoes') ? 'active' : ''}>Configurações</Link>
         <div className="sidebar-footer">
-          <a className="button button-primary sidebar-store-link" href={STORE_PUBLIC_URL} target="_blank" rel="noreferrer" style={{ background: '#333', borderColor: '#333' }}>
-            Ver loja
-          </a>
-          <button type="button" className="button button-secondary sidebar-logout" onClick={handleLogout} style={{ background: 'transparent', color: '#999', borderColor: '#444' }}>
-            Sair
-          </button>
+          <a href={brand.storeUrl} target="_blank" rel="noreferrer" className="btn btn-sm text-white border-secondary w-100" style={{ borderColor: '#444' }}>Ver Loja</a>
+          <button className="btn btn-sm text-white-50 w-100" onClick={() => { clearAdminToken(); navigate('/entrar'); }} style={{ borderColor: '#444' }}>Sair</button>
         </div>
       </aside>
-
-      <div className="content-shell">
-        <header className={`page-header panel glass-panel ${headerTone}`}>
-          <div className="page-title-block">
-            <span className="page-title-mark" aria-hidden="true">
-              <span>{titleInitial}</span>
-            </span>
-            <div className="page-title-copy">
-              {subtitle ? <p className="eyebrow">{subtitle}</p> : null}
-              <h2>{title}</h2>
-            </div>
-          </div>
-          <div className="page-actions">{headerActions}</div>
-        </header>
-
-        <main className="page-content">{children}</main>
-      </div>
-      {confirmDialog}
+      <main className="main-content flex-grow-1">
+        <Outlet />
+      </main>
     </div>
   );
-}
-
-function navLinkClassName(isActive) {
-  return `nav-link${isActive ? ' is-active' : ''}`;
 }

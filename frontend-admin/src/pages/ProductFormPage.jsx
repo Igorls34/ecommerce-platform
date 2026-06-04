@@ -1,142 +1,57 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getProductById, createProduct, updateProduct, getCategories } from '../services/api';
 
-import { AdminLayout } from '../components/AdminLayout';
-import { LoadingSpinner } from '../components/LoadingSpinner';
-import { ProductForm } from '../components/ProductForm';
-import {
-  createProduct,
-  getCategories,
-  getProductById,
-  updateProduct,
-  uploadProductImage,
-} from '../services/api';
-
-export function ProductFormPage({ mode }) {
+export function ProductFormPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { productId } = useParams();
-  const [initialProduct, setInitialProduct] = useState(null);
+  const isEdit = Boolean(id);
+  const [form, setForm] = useState({ name: '', price: '', stock: '', categoryId: '', description: '', visible: true });
   const [categories, setCategories] = useState([]);
-  const [busy, setBusy] = useState(false);
-  const [loading, setLoading] = useState(mode === 'edit');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    let active = true;
-
-    getCategories()
-      .then((data) => {
-        if (active) {
-          setCategories(data);
-        }
-      })
-      .catch((requestError) => {
-        if (active) {
-          setError(requestError.message || 'Não foi possível carregar as categorias.');
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (mode !== 'edit' || !productId) {
-      return;
+    getCategories().then(d => setCategories(Array.isArray(d) ? d : []));
+    if (isEdit) {
+      getProductById(id).then(p => setForm({ name: p.name, price: p.price, stock: p.stock, categoryId: p.categoryId, description: p.description || '', visible: p.visible })).catch(e => setError(e.message));
     }
+  }, [id]);
 
-    let active = true;
+  function handleChange(e) { setForm(f => ({ ...f, [e.target.name]: e.target.value })); }
 
-    getProductById(productId)
-      .then((product) => {
-        if (!active) {
-          return;
-        }
-
-        if (!product) {
-          setError('Produto não encontrado.');
-          setLoading(false);
-          return;
-        }
-
-        setInitialProduct(product);
-        setLoading(false);
-      })
-      .catch((requestError) => {
-        if (active) {
-          setError(requestError.message || 'Não foi possível carregar o produto.');
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [mode, productId]);
-
-  async function handleSubmit(payload) {
-    setBusy(true);
-    setError('');
-
+  async function handleSubmit(e) {
+    e.preventDefault(); setLoading(true); setError('');
     try {
-      const requestPayload = { ...payload };
-
-      if (payload.galleryImageFiles?.length) {
-        const uploadedGalleryImages = await Promise.all(
-          payload.galleryImageFiles.map((file) => uploadProductImage(file)),
-        );
-
-        requestPayload.galleryImageUrls = [
-          ...(payload.galleryImageUrls || []),
-          ...uploadedGalleryImages.map((uploadResult) => uploadResult.imageUrl).filter(Boolean),
-        ];
-        requestPayload.galleryImageFiles = [];
-      }
-
-      if (mode === 'edit' && productId) {
-        await updateProduct(productId, requestPayload);
-      } else {
-        await createProduct(requestPayload);
-      }
-
-      navigate('/produtos', { replace: true });
-    } catch (requestError) {
-      setError(requestError.message || 'Não foi possível salvar o produto.');
-    } finally {
-      setBusy(false);
-    }
+      const data = { ...form, price: String(form.price), stock: Number(form.stock), categoryId: Number(form.categoryId) };
+      if (isEdit) await updateProduct(id, data); else await createProduct(data);
+      navigate('/produtos');
+    } catch (err) { setError(err.message); }
+    finally { setLoading(false); }
   }
 
   return (
-    <AdminLayout
-      title={mode === 'edit' ? 'Editar Produto' : 'Novo Produto'}
-      subtitle={
-        mode === 'edit' ? 'Atualização padronizada do catálogo' : 'Cadastro padronizado do catálogo'
-      }
-      actions={
-        <Link className="button button-secondary" to="/produtos">
-          Voltar
-        </Link>
-      }
-    >
-      {loading ? <LoadingSpinner variant="dual-ring" text="Carregando produto..." /> : null}
-      {error ? <div className="panel feedback feedback-error">{error}</div> : null}
-      {!loading && !categories.length ? (
-        <div className="panel feedback feedback-error">
-          Cadastre uma categoria antes de salvar produtos.
+    <div style={{ maxWidth: 600 }}>
+      <div className="page-header"><h2>{isEdit ? 'Editar Produto' : 'Novo Produto'}</h2></div>
+      {error && <div className="alert alert-danger">{error}</div>}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3"><label className="form-label">Nome</label><input className="form-control" name="name" value={form.name} onChange={handleChange} required /></div>
+        <div className="row g-3 mb-3">
+          <div className="col-6"><label className="form-label">Preço (R$)</label><input className="form-control" name="price" type="number" step="0.01" value={form.price} onChange={handleChange} required /></div>
+          <div className="col-6"><label className="form-label">Estoque</label><input className="form-control" name="stock" type="number" value={form.stock} onChange={handleChange} required /></div>
         </div>
-      ) : null}
-
-      {!loading ? (
-        <ProductForm
-          initialValues={initialProduct}
-          categories={categories}
-          onSubmit={handleSubmit}
-          submitLabel={mode === 'edit' ? 'Salvar Produto' : 'Salvar Produto'}
-          busy={busy}
-        />
-      ) : null}
-    </AdminLayout>
+        <div className="mb-3"><label className="form-label">Categoria</label>
+          <select className="form-select" name="categoryId" value={form.categoryId} onChange={handleChange} required>
+            <option value="">Selecione...</option>
+            {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+        </div>
+        <div className="mb-3"><label className="form-label">Descrição</label><textarea className="form-control" name="description" value={form.description} onChange={handleChange} rows={3} /></div>
+        <div className="d-flex gap-2">
+          <button className="btn btn-dark" disabled={loading}>{loading ? 'Salvando...' : 'Salvar'}</button>
+          <button type="button" className="btn btn-outline-dark" onClick={() => navigate('/produtos')}>Cancelar</button>
+        </div>
+      </form>
+    </div>
   );
 }

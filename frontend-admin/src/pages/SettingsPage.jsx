@@ -1,290 +1,38 @@
-import { useEffect, useState } from 'react';
-
-import { AdminLayout } from '../components/AdminLayout';
-import { LoadingSpinner } from '../components/LoadingSpinner';
+import { useState, useEffect } from 'react';
 import { getAdminSettings, updateAdminSettings } from '../services/api';
 
-function FieldRow({ fields, settings, onChange }) {
-  const visible = fields.filter((f) => f.key !== 'spacer');
-  return (
-    <div className="field-row">
-      {visible.map((field) => (
-        <div key={field.key} className="field">
-          <label htmlFor={`setting-${field.key}`}>{field.label}</label>
-          {field.options ? (
-            <select
-              id={`setting-${field.key}`}
-              className="input"
-              value={settings[field.key] || ''}
-              onChange={(event) => onChange(field.key, event.target.value)}
-            >
-              {field.options.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
-          ) : (
-            <input
-              id={`setting-${field.key}`}
-              className="input"
-              type={field.type || 'text'}
-              step={field.step}
-              placeholder={field.placeholder}
-              maxLength={field.maxLength}
-              value={settings[field.key] || ''}
-              onChange={(event) => onChange(field.key, event.target.value)}
-            />
-          )}
-          {field.hint ? <div className="field-help">{field.hint}</div> : null}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function SettingsSection({ title, subtitle, rows, settings, onChange }) {
-  return (
-    <section className="panel form-panel">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">{subtitle}</p>
-          <h3>{title}</h3>
-        </div>
-      </div>
-      <div className="form-layout">
-        {rows.map((row, index) => (
-          <FieldRow key={index} fields={row} settings={settings} onChange={onChange} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function SettingsPage() {
-  const [settings, setSettings] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [form, setForm] = useState({ storeName: '', adminEmail: '', pixKey: '', storeUrl: '' });
+  const [loading, setLoading] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    let active = true;
-    async function load() {
-      try {
-        const data = await getAdminSettings();
-        if (active) {
-          const mapped = {};
-          const allKeys = [
-            'adminOrderEmail', 'mailFrom', 'mailFromName',
-            'storeBaseUrl', 'adminBaseUrl',
-            'senderName', 'senderPhone', 'senderEmail', 'senderDocument',
-            'senderAddress', 'senderNumber', 'senderComplement',
-            'senderDistrict', 'senderCity', 'senderState',
-            'storeZipCode', 'storeWeight', 'storeLength', 'storeWidth', 'storeHeight',
-            'pixKey', 'pixMerchantName', 'pixMerchantCity',
-            'pixProvider', 'cardProvider',
-            'companyName', 'companyCnpj', 'stateRegistration', 'taxRegime',
-          ];
-          for (const key of allKeys) {
-            mapped[key] = data[key] || '';
-          }
-          setSettings(mapped);
-        }
-      } catch (requestError) {
-        if (active) setError(requestError.message || 'Não foi possível carregar as configurações.');
-      } finally {
-        if (active) setLoading(false);
-      }
-    }
-    load();
-    return () => { active = false; };
+    getAdminSettings().then(d => setForm({
+      storeName: d?.storeName || '', adminEmail: d?.adminOrderEmail || '',
+      pixKey: d?.pixKey || '', storeUrl: d?.storeBaseUrl || ''
+    })).catch(() => {});
   }, []);
 
-  function updateField(key, value) {
-    setSettings((current) => ({ ...current, [key]: value }));
-  }
+  function handleChange(e) { setForm(f => ({ ...f, [e.target.name]: e.target.value })); }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    if (busy) return;
-    setBusy(true);
-    setError('');
-    setSuccess('');
-    try {
-      await updateAdminSettings(settings);
-      setSuccess('Configurações salvas.');
-      window.setTimeout(() => setSuccess(''), 4000);
-    } catch (requestError) {
-      setError(requestError.message || 'Não foi possível salvar as configurações.');
-    } finally {
-      setBusy(false);
-    }
+  async function handleSubmit(e) {
+    e.preventDefault(); setLoading(true);
+    try { await updateAdminSettings(form); setSaved(true); setTimeout(() => setSaved(false), 2000); }
+    catch (err) { alert(err.message); }
+    finally { setLoading(false); }
   }
-
-  const f = (key, label, opts = {}) => ({ key, label, ...opts });
 
   return (
-    <AdminLayout title="Configurações" subtitle="Painel administrativo">
-      {error ? <div className="panel feedback feedback-error">{error}</div> : null}
-      {success ? <div className="panel feedback feedback-success">{success}</div> : null}
-
-      {loading ? (
-        <LoadingSpinner variant="dual-ring" text="Carregando..." />
-      ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 14 }}>
-          <div className="page-summary--split">
-            <SettingsSection
-              title="Notificações"
-              subtitle="Alertas do sistema"
-              settings={settings}
-              onChange={updateField}
-              rows={[
-                [f('adminOrderEmail', 'E-mail do lojista', { type: 'email', placeholder: 'admin@exemplo.com.br', hint: 'Recebe alertas de pedidos pagos e notificações.' })],
-              ]}
-            />
-            <SettingsSection
-              title="Email"
-              subtitle="Remetente dos e-mails"
-              settings={settings}
-              onChange={updateField}
-              rows={[
-                [
-                  f('mailFrom', 'E-mail remetente', { type: 'email', placeholder: 'contato@exemplo.com.br' }),
-                  f('mailFromName', 'Nome remetente', { type: 'text', placeholder: 'Minha Loja' }),
-                ],
-              ]}
-            />
-          </div>
-
-          <SettingsSection
-            title="URLs"
-            subtitle="Links usados nos e-mails e integrações"
-            settings={settings}
-            onChange={updateField}
-            rows={[
-              [
-                f('storeBaseUrl', 'URL da loja', { type: 'url', placeholder: 'https://exemplo.com.br' }),
-                f('adminBaseUrl', 'URL do admin', { type: 'url', placeholder: 'https://admin.exemplo.com.br' }),
-              ],
-            ]}
-          />
-
-          <SettingsSection
-            title="Remetente (etiquetas de frete)"
-            subtitle="Dados do lojista no Melhor Envio"
-            settings={settings}
-            onChange={updateField}
-            rows={[
-              [
-                f('senderName', 'Nome / Razão social', { placeholder: 'Minha Loja' }),
-                f('senderDocument', 'CPF/CNPJ', { placeholder: '000.000.000-00' }),
-              ],
-              [
-                f('senderPhone', 'Telefone', { placeholder: '(11) 99999-9999' }),
-                f('senderEmail', 'E-mail', { type: 'email', placeholder: 'contato@exemplo.com.br' }),
-              ],
-              [
-                f('senderAddress', 'Logradouro', { placeholder: 'Rua Exemplo' }),
-                f('senderNumber', 'Número', { placeholder: '123' }),
-              ],
-              [
-                f('senderComplement', 'Complemento', { placeholder: 'Sala 1' }),
-                f('senderDistrict', 'Bairro', { placeholder: 'Centro' }),
-              ],
-              [
-                f('senderCity', 'Cidade', { placeholder: 'São Paulo' }),
-                f('senderState', 'UF', { placeholder: 'SP', maxLength: 2 }),
-              ],
-            ]}
-          />
-
-          <div className="page-summary--split">
-            <SettingsSection
-              title="Dimensões do pacote"
-              subtitle="Cálculo de frete"
-              settings={settings}
-              onChange={updateField}
-              rows={[
-                [
-                  f('storeZipCode', 'CEP de origem', { placeholder: '00000-000' }),
-                  f('storeWeight', 'Peso (kg)', { type: 'number', placeholder: '0.3', step: '0.01' }),
-                ],
-                [
-                  f('storeLength', 'Comprimento (cm)', { type: 'number', placeholder: '20' }),
-                  f('storeWidth', 'Largura (cm)', { type: 'number', placeholder: '15' }),
-                ],
-                [
-                  f('storeHeight', 'Altura (cm)', { type: 'number', placeholder: '5' }),
-                  { key: 'spacer', label: '' },
-                ],
-              ]}
-            />
-            {(!settings.pixProvider || settings.pixProvider !== 'mercado_pago') ? (
-              <SettingsSection
-                title="PIX Local"
-                subtitle="QR Code manual (fallback)"
-                settings={settings}
-                onChange={updateField}
-                rows={[
-                  [
-                    f('pixKey', 'Chave PIX', { placeholder: 'email@exemplo.com' }),
-                    f('pixMerchantCity', 'Cidade', { placeholder: 'São Paulo' }),
-                  ],
-                  [
-                    f('pixMerchantName', 'Nome do recebedor', { placeholder: 'Minha Loja' }),
-                    { key: 'spacer', label: '' },
-                  ],
-                ]}
-              />
-            ) : (
-              <section className="panel form-panel">
-                <div className="section-heading">
-                  <div>
-                    <p className="eyebrow">Gerenciado pelo Mercado Pago</p>
-                    <h3>PIX via gateway</h3>
-          </div>
-
-          <SettingsSection
-            title="Dados fiscais da empresa"
-            subtitle="Emissão de NF-e e notas fiscais"
-            settings={settings}
-            onChange={updateField}
-            rows={[
-              [
-                f('companyName', 'Razão social', { placeholder: 'Minha Loja LTDA' }),
-                f('companyCnpj', 'CNPJ', { placeholder: '00.000.000/0001-00' }),
-              ],
-              [
-                f('stateRegistration', 'Inscrição Estadual', { placeholder: '00.000.000-0' }),
-                f('taxRegime', 'Regime tributário', {
-                  options: [
-                    { value: '', label: 'Não definido' },
-                    { value: 'mei', label: 'MEI' },
-                    { value: 'simples', label: 'Simples Nacional' },
-                    { value: 'presumido', label: 'Lucro Presumido' },
-                    { value: 'real', label: 'Lucro Real' },
-                  ],
-                }),
-              ],
-            ]}
-          />
-                </div>
-                <div className="form-layout">
-                  <p className="page-summary__text">
-                    A chave PIX, QR Code e dados do recebedor são gerenciados diretamente na conta
-                    do Mercado Pago. Altere o provedor acima para voltar ao modo manual.
-                  </p>
-                </div>
-              </section>
-            )}
-          </div>
-
-          <div className="category-editor-actions">
-            <button type="submit" className="button button-primary" disabled={busy}>
-              {busy ? 'Salvando...' : 'Salvar'}
-            </button>
-          </div>
-        </form>
-      )}
-    </AdminLayout>
+    <div style={{ maxWidth: 600 }}>
+      <div className="page-header"><h2>Configurações</h2></div>
+      {saved && <div className="alert alert-success">Salvo com sucesso!</div>}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3"><label className="form-label">Nome da Loja</label><input className="form-control" name="storeName" value={form.storeName} onChange={handleChange} /></div>
+        <div className="mb-3"><label className="form-label">E-mail Admin</label><input className="form-control" name="adminEmail" value={form.adminEmail} onChange={handleChange} /></div>
+        <div className="mb-3"><label className="form-label">Chave PIX</label><input className="form-control" name="pixKey" value={form.pixKey} onChange={handleChange} /></div>
+        <div className="mb-3"><label className="form-label">URL da Loja</label><input className="form-control" name="storeUrl" value={form.storeUrl} onChange={handleChange} /></div>
+        <button className="btn btn-dark" disabled={loading}>{loading ? 'Salvando...' : 'Salvar'}</button>
+      </form>
+    </div>
   );
 }

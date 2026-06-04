@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* { font-family: 'Inter', system-ui, sans-serif; }
+body { background: #f5f5f5; color: #1a1a1a; }
+
+.sidebar {
+  background: #111 !important;
+  min-height: 100vh;
+  width: 220px;
+  position: fixed;
+  top: 0; left: 0;
+  padding: 24px 16px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.sidebar-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding: 0 8px; }
+.sidebar-logo span { color: #fff; font-weight: 700; font-size: 1rem; }
+.sidebar a {
+  color: rgba(255,255,255,0.55); text-decoration: none; padding: 10px 12px;
+  border-radius: 10px; font-size: 0.88rem; font-weight: 500; transition: .15s;
+}
+.sidebar a:hover, .sidebar a.active { background: rgba(255,255,255,0.08); color: #fff; }
+.sidebar-footer { margin-top: auto; display: grid; gap: 8px; }
+.sidebar-footer .btn { font-size: 0.82rem; }
+
+.main-content { margin-left: 220px; padding: 28px 32px; min-height: 100vh; }
+
+.login-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #111, #1a1a2e); padding: 20px;
+}
+.login-card {
+  width: 100%; max-width: 380px; background: #fff; border-radius: 20px;
+  padding: 40px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.login-card h1 { font-size: 1.3rem; font-weight: 700; text-align: center; color: #111; }
+
+.card { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.card-header { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06); font-weight: 600; }
+
+.table { margin: 0; }
+.table th { font-weight: 600; color: #888; font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; border-color: #eee; }
+.table td { vertical-align: middle; font-size: 0.88rem; border-color: #f5f5f5; }
+
+.btn { font-weight: 600; border-radius: 10px; padding: 8px 18px; font-size: 0.85rem; }
+.btn-dark { background: #111; border-color: #111; }
+.btn-dark:hover { background: #000; }
+.btn-outline-dark { color: #111; border-color: #ccc; }
+.btn-outline-dark:hover { background: #111; color: #fff; }
+
+.form-control, .form-select { border-radius: 10px; border-color: #e5e5e5; padding: 10px 14px; font-size: 0.88rem; }
+.form-control:focus { border-color: #111; box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
+.form-label { font-weight: 500; font-size: 0.83rem; color: #666; margin-bottom: 5px; }
+
+.badge { font-weight: 500; padding: 5px 10px; border-radius: 7px; font-size: 0.75rem; }
+
+.stat-card { text-align: center; padding: 18px; border-radius: 14px; background: #fff; border: 1px solid rgba(0,0,0,0.06); }
+.stat-card h3 { font-size: 1.8rem; font-weight: 700; color: #111; margin: 0; }
+.stat-card span { font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: .05em; }
+
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.page-header h2 { font-size: 1.5rem; font-weight: 700; color: #111; }
+
+.thumb { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: #f5f5f5; border: 1px solid #eee; }
+
+.alert { border-radius: 12px; font-size: 0.88rem; border: none; }
+
+.spinner-border { color: #111 !important; }
+
+@media (max-width: 768px) {
+  .sidebar { width: 100%; position: relative; min-height: auto; flex-direction: row; flex-wrap: wrap; padding: 12px; gap: 4px; }
+  .main-content { margin-left: 0; padding: 16px; }
+}

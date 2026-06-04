@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../state/CartContext';
 import { useStoreAuth } from '../state/StoreAuthContext';
 import { createStoreOrder } from '../services/api';
@@ -8,7 +8,7 @@ import { formatCurrency } from '../lib/formatters';
 export function CheckoutPage() {
   const navigate = useNavigate();
   const { items, clear } = useCart();
-  const { isAuthenticated, token } = useStoreAuth();
+  const { isAuthenticated, token, isLoadingAuth } = useStoreAuth();
   const [form, setForm] = useState({ name: '', email: '', phone: '', cpf: '', zipCode: '', street: '', number: '', neighborhood: '', city: '', state: '', notes: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -44,6 +44,24 @@ export function CheckoutPage() {
 
   if (items.length === 0) {
     return <div className="container py-5 text-center"><h3>Carrinho vazio</h3><p>Adicione produtos antes de finalizar.</p></div>;
+  }
+
+  if (isLoadingAuth) {
+    return <div className="container py-5 text-center"><div className="spinner-border" /><p className="mt-3 text-muted">Verificando sessão...</p></div>;
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container py-5" style={{ maxWidth: 480 }}>
+        <div className="text-center mb-4">
+          <div style={{ width: 64, height: 64, borderRadius: 20, background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '1.5rem' }}>🔒</div>
+          <h3>Faça login para continuar</h3>
+          <p className="text-muted">Você precisa estar logado para finalizar a compra.</p>
+        </div>
+        <Link to="/conta" state={{ from: '/checkout' }} className="btn btn-dark w-100 mb-2" style={{ padding: '14px', borderRadius: 12 }}>Entrar ou Criar Conta</Link>
+        <Link to="/produtos" className="btn btn-outline-dark w-100" style={{ borderRadius: 12 }}>Continuar Comprando</Link>
+      </div>
+    );
   }
 
   return (

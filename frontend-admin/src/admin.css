@@ -69,5 +69,22 @@ body { background: #f5f5f5; color: #1a1a1a; }
 
 @media (max-width: 768px) {
   .sidebar { width: 100%; position: relative; min-height: auto; flex-direction: row; flex-wrap: wrap; padding: 12px; gap: 4px; }
+  .sidebar a { font-size: 0.75rem; padding: 8px 10px; }
+  .sidebar-logo { display: none; }
+  .sidebar-footer { display: none; }
   .main-content { margin-left: 0; padding: 16px; }
+  .page-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .page-header h2 { font-size: 1.2rem; }
+  .table { font-size: 0.78rem; }
+  .stat-card h3 { font-size: 1.4rem; }
+  .card { border-radius: 12px; }
+  .main-content .container { padding: 0; }
+}
+
+@media (max-width: 576px) {
+  .sidebar { padding: 8px; gap: 2px; }
+  .sidebar a { padding: 6px 8px; font-size: 0.7rem; border-radius: 8px; }
+  .main-content { padding: 12px; }
+  .btn { padding: 6px 12px; font-size: 0.8rem; }
+  .form-control { padding: 8px 10px; font-size: 0.82rem; }
 }

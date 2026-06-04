@@ -1,30 +1,40 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { HomePage } from './pages/HomePage';
-import { ProductsPage } from './pages/ProductsPage';
-import { ProductPage } from './pages/ProductPage';
-import { CartPage } from './pages/CartPage';
-import { CheckoutPage } from './pages/CheckoutPage';
-import { OrderConfirmationPage } from './pages/OrderConfirmationPage';
-import { AccountPage } from './pages/AccountPage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'));
+const AccountPage = lazy(() => import('./pages/AccountPage'));
+
+const Loading = () => (
+  <div className="d-flex justify-content-center align-items-center" style={{ minHeight: 300 }}>
+    <div className="spinner-border" role="status" />
+  </div>
+);
 
 export default function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
       <main className="flex-grow-1">
-        <Routes>
-          <Route path="/loja" element={<Navigate to="/" replace />} />
-          <Route path="/loja/*" element={<Navigate to="/" replace />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/produtos" element={<ProductsPage />} />
-          <Route path="/produto/:id" element={<ProductPage />} />
-          <Route path="/carrinho" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/checkout/pagamento/:orderId" element={<OrderConfirmationPage />} />
-          <Route path="/conta" element={<AccountPage />} />
-        </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/loja" element={<Navigate to="/" replace />} />
+            <Route path="/loja/*" element={<Navigate to="/" replace />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/produtos" element={<ProductsPage />} />
+            <Route path="/produto/:id" element={<ProductPage />} />
+            <Route path="/carrinho" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/checkout/pagamento/:orderId" element={<OrderConfirmationPage />} />
+            <Route path="/conta" element={<AccountPage />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -1,0 +1,92 @@
+/* ===== Hero / Editorial Surface ===== */
+.collection-hero {
+  position: relative;
+  min-height: min(560px, calc(100svh - 92px));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+.collection-hero-image,
+.collection-hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.collection-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-hero-fallback {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 253, 249, 0.72), transparent 24%),
+    radial-gradient(circle at 78% 20%, rgba(200, 169, 106, 0.56), transparent 28%),
+    radial-gradient(circle at 50% 92%, rgba(34, 56, 106, 0.3), transparent 38%),
+    linear-gradient(135deg, #b98998 0%, #8f5c70 48%, #704255 100%);
+}
+
+.collection-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(200, 169, 106, 0.06), rgba(140, 80, 96, 0.22)),
+    repeating-linear-gradient(90deg, rgba(255, 253, 249, 0.04) 0 1px, transparent 1px 90px);
+}
+
+.collection-hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 32px));
+  text-align: center;
+  color: var(--color-bg-brand-bege);
+  animation: hero-copy-in 420ms 80ms var(--ease-out-soft) both;
+}
+
+.collection-hero-content .section-eyebrow {
+  color: rgba(200, 169, 106, 0.9);
+  letter-spacing: 0.18em;
+}
+
+.collection-hero-content h1 {
+  margin: 8px 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+}
+
+.collection-hero-content p {
+  margin-inline: auto;
+  max-width: 46ch;
+  font-weight: 300;
+  color: rgba(246, 241, 235, 0.85);
+}
+
+.collection-hero-light {
+  min-height: clamp(360px, 58svh, 460px);
+}
+
+.collection-hero-light .collection-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(200, 169, 106, 0.14), rgba(140, 80, 96, 0.28)),
+    linear-gradient(90deg, rgba(232, 217, 184, 0.12), rgba(232, 217, 184, 0));
+}
+
+.collection-hero-light .collection-hero-content {
+  width: min(640px, calc(100% - 32px));
+}
+
+.collection-hero-light .collection-hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.collection-hero-light .collection-hero-content p {
+  max-width: 42ch;
+}
+
+

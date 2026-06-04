@@ -1,0 +1,5 @@
+#!/bin/sh
+branch=$(git rev-parse --abbrev-ref HEAD)
+[ "$branch" != "main" ] && exit 0
+scriptpath="$(cd "$(dirname "$0")/../scripts" && cygpath -w "$(pwd)")/watch-deploy.ps1"
+powershell.exe -Command "Start-Process -WindowStyle Normal powershell -ArgumentList '-NoExit', '-File', '$scriptpath', '-WaitForNewRun'"

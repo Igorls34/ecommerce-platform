@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos | Painel Administrativo</title>
+  <link rel="stylesheet" href="../styles/global.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar-brand">
+        <span class="brand-kicker">MVP</span>
+        <h1>Painel Admin</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="produtos.html" class="nav-link is-active" aria-current="page">Produtos</a>
+        <a href="novo-produto.html" class="nav-link">Novo Produto</a>
+      </nav>
+    </aside>
+
+    <div class="content-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2>Listagem de Produtos</h2>
+        </div>
+        <button type="button" class="button button-secondary" id="logoutButton">Sair</button>
+      </header>
+
+      <main class="page">
+        <section class="page-intro">
+          <div>
+            <h3>Produtos cadastrados</h3>
+            <p>Visualize, edite e remova itens do catálogo de joias.</p>
+          </div>
+          <a href="novo-produto.html" class="button button-primary">+ Novo Produto</a>
+        </section>
+
+        <section class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <tr>
+                <td colspan="5" class="table-message">Carregando...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../services/api.js" defer></script>
+  <script src="produtos.js" defer></script>
+</body>
+</html>

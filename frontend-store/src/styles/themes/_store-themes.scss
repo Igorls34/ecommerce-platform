@@ -1,0 +1,408 @@
+/* === TEMAS DA LOJA === */
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-bg-primary: #f6f1eb;
+  --color-bg-secondary: #e6d5c3;
+  --color-ui-soft: #e8d9b8;
+  --color-brand-primary: #223869;
+  --color-text-primary: #1f2530;
+  --color-bg-brand-bege: #f6f1eb;
+  --color-bg-brand-roxo: #e6d5c3;
+  --color-bg-brand-lilas: #e8d9b8;
+  --color-bg-brand-vinho: #223869;
+  --color-bg-brand-vinho-escuro: #17284d;
+  --surface: rgba(255, 253, 249, 0.9);
+  --surface-strong: rgba(255, 253, 249, 0.97);
+  --border: rgba(230, 213, 195, 0.74);
+  --border-strong: rgba(34, 56, 106, 0.24);
+  --text-soft: #6f6a63;
+  --text-faint: #9a9186;
+  --accent: #c8a96a;
+  --accent-soft: #e8d9b8;
+  --accent-strong: #223869;
+  --shadow: 0 22px 48px rgba(34, 56, 106, 0.09);
+  --page-bg:
+    radial-gradient(circle at 10% 0%, rgba(200, 169, 106, 0.16), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(230, 213, 195, 0.72), transparent 30%),
+    linear-gradient(180deg, #f6f1eb 0%, #faf7f2 46%, #fffdf9 100%);
+}
+
+body {
+  background: var(--page-bg);
+  background-attachment: fixed;
+}
+
+.store-shell {
+  color: var(--color-text-primary);
+}
+
+.store-header.is-scrolled,
+:root[data-theme='dark'] .store-header {
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  border-bottom-color: var(--border);
+  backdrop-filter: blur(18px);
+}
+
+.brand-subline,
+.store-nav-link,
+.checkout-field > span,
+.pix-copy-box > span,
+.cart-item-total span,
+.cookie-consent-copy span,
+.collection-product-category,
+.collection-product-price {
+  color: var(--text-soft);
+}
+
+.store-nav-link:hover,
+.store-nav-link.is-active {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--color-bg-brand-vinho);
+}
+
+:root[data-theme='dark'] .auth-header p,
+:root[data-theme='dark'] .authenticated-label,
+:root[data-theme='dark'] .authenticated-email,
+:root[data-theme='dark'] .auth-tab-vertical {
+  color: var(--text-soft);
+}
+
+:root[data-theme='dark'] .auth-form-wrapper,
+:root[data-theme='dark'] .account-card-authenticated,
+:root[data-theme='dark'] .auth-tab-vertical {
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  border-color: var(--border);
+}
+
+:root[data-theme='dark'] .auth-tab-vertical:hover,
+:root[data-theme='dark'] .auth-tab-vertical.active {
+  color: var(--color-text-primary);
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface-strong));
+}
+
+.theme-toggle,
+.cart-pill,
+.store-nav-link[href='/carrinho'] {
+  border-color: var(--border);
+}
+
+.theme-toggle {
+  background: color-mix(in srgb, var(--surface-strong) 76%, transparent);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-strong);
+}
+
+.cart-pill {
+  background: color-mix(in srgb, var(--accent) 26%, transparent);
+  color: var(--color-bg-brand-vinho);
+}
+
+.hero-panel,
+.category-hero-panel,
+.content-panel,
+.account-panel,
+.account-card,
+.product-detail,
+.empty-panel,
+.product-card,
+.product-card-editorial,
+.cart-item,
+.cart-summary,
+.checkout-summary,
+.checkout-section,
+.payment-tab,
+.payment-note,
+.stripe-card-form,
+.checkout-customer,
+.confirmation-meta,
+.availability-form,
+.about-hero,
+.about-service-grid article,
+.legal-hero,
+.legal-content,
+.legal-section,
+.cookie-consent,
+.not-found-page {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--color-text-primary);
+}
+
+.hero-panel,
+.category-hero-panel,
+.cart-summary,
+.checkout-summary,
+.not-found-page {
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--accent-soft) 28%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-strong) 92%, transparent),
+      color-mix(in srgb, var(--surface) 86%, transparent)
+    );
+}
+
+.hero-panel-editorial,
+.category-hero-panel.hero-panel-editorial {
+  background:
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--accent-soft) 44%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-bg-brand-vinho) 90%, #fffdf9),
+      color-mix(in srgb, var(--color-bg-brand-vinho) 72%, var(--accent))
+    );
+  color: #fffdf9;
+}
+
+:root[data-theme='dark'] .hero-panel-editorial,
+:root[data-theme='dark'] .category-hero-panel.hero-panel-editorial {
+  background:
+    radial-gradient(circle at 88% 0%, rgba(200, 169, 106, 0.2), transparent 34%),
+    radial-gradient(circle at 4% 96%, rgba(230, 213, 195, 0.18), transparent 32%),
+    linear-gradient(135deg, #17284d, #223869 58%, #121f3d);
+  border-color: rgba(200, 169, 106, 0.18);
+  color: #fffdf9;
+}
+
+.category-hero-panel.hero-panel-editorial .hero-highlight-editorial {
+  background: rgba(255, 253, 249, 0.82);
+  border-color: rgba(200, 169, 106, 0.32);
+  color: #1f2530;
+}
+
+.category-hero-panel.hero-panel-editorial .hero-highlight-editorial strong,
+.category-hero-panel.hero-panel-editorial .hero-highlight-editorial span,
+.category-hero-panel.hero-panel-editorial .hero-highlight-editorial p {
+  color: #1f2530;
+}
+
+:root[data-theme='dark'] .category-hero-panel.hero-panel-editorial .hero-highlight-editorial {
+  background: rgba(255, 253, 249, 0.08);
+  border-color: rgba(255, 253, 249, 0.16);
+  color: #fffdf9;
+}
+
+:root[data-theme='dark'] .category-hero-panel.hero-panel-editorial .hero-highlight-editorial strong,
+:root[data-theme='dark'] .category-hero-panel.hero-panel-editorial .hero-highlight-editorial span,
+:root[data-theme='dark'] .category-hero-panel.hero-panel-editorial .hero-highlight-editorial p {
+  color: #fffdf9;
+}
+
+.button-secondary,
+.content-panel .button-secondary,
+.product-detail .button-secondary,
+.empty-panel .button-secondary,
+.button-secondary-dark,
+.legal-hero .button-secondary,
+.cookie-consent .button-secondary,
+.not-found-page .button-secondary {
+  background: color-mix(in srgb, var(--surface-strong) 72%, transparent);
+  color: var(--color-bg-brand-vinho);
+  border-color: var(--accent);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #223869, #17284d);
+  color: #fffdf9;
+  box-shadow: 0 12px 28px rgba(34, 56, 106, 0.16);
+}
+
+:root[data-theme='dark'] .button-primary {
+  color: #26171d;
+}
+
+.text-input,
+.select-input,
+.quantity-input,
+.quantity-button,
+textarea,
+.pix-copy-box textarea {
+  background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+  color: var(--color-text-primary);
+  border-color: var(--border-strong);
+}
+
+.text-input::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.select-input option {
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+}
+
+.text-input:focus,
+.select-input:focus,
+.quantity-input:focus,
+textarea:focus,
+.pix-copy-box textarea:focus {
+  border-color: var(--color-bg-brand-vinho);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.product-card:hover,
+.cart-item:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.product-card-media,
+.product-card-editorial .product-card-media,
+.product-detail-media,
+.summary-product-thumb,
+.pix-qr-frame,
+.about-visual-main,
+.about-visual-strip {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-strong) 82%, #ffffff 8%),
+    color-mix(in srgb, var(--surface) 88%, transparent)
+  );
+}
+
+.product-card-editorial .product-category,
+.product-card-editorial .product-card-description,
+.category-hero-panel .hero-copy p,
+.category-hero-panel .section-eyebrow,
+.category-hero-panel .hero-highlight-editorial span,
+.category-hero-panel .hero-highlight-editorial p,
+.content-panel-editorial .section-intro p,
+.content-panel-editorial .section-eyebrow {
+  color: var(--text-soft);
+}
+
+.checkout-path span,
+.payment-note,
+.payment-tab {
+  background: color-mix(in srgb, var(--surface-strong) 70%, transparent);
+}
+
+.checkout-path span.is-current,
+.payment-tab.is-active {
+  background: var(--color-bg-brand-vinho);
+  border-color: var(--accent);
+  color: #fffdf9;
+}
+
+.payment-note.is-highlight,
+.checkout-inline-feedback,
+.feedback-success,
+.payment-status-panel.is-paid {
+  background: color-mix(in srgb, #dff4df 72%, var(--surface-strong));
+  color: #3d6b4f;
+}
+
+:root[data-theme='dark'] .payment-note.is-highlight,
+:root[data-theme='dark'] .checkout-inline-feedback,
+:root[data-theme='dark'] .feedback-success,
+:root[data-theme='dark'] .payment-status-panel.is-paid {
+  background: rgba(58, 86, 62, 0.46);
+  color: #d7f2d2;
+}
+
+.feedback-error,
+.payment-status-panel.is-canceled,
+.checkout-field small {
+  color: #8a312d;
+}
+
+:root[data-theme='dark'] .feedback-error,
+:root[data-theme='dark'] .payment-status-panel.is-canceled {
+  background: rgba(111, 50, 48, 0.46);
+  color: #ffd2ce;
+}
+
+:root[data-theme='dark'] .checkout-field small {
+  color: #ffb5ae;
+}
+
+.about-contact-band,
+.store-footer {
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      color-mix(in srgb, var(--accent) 28%, transparent),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #17284d, #223869);
+  color: #f6f1eb;
+}
+
+:root[data-theme='dark'] .about-contact-band,
+:root[data-theme='dark'] .store-footer {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(200, 169, 106, 0.16), transparent 30%),
+    linear-gradient(135deg, #101b34, #17284d);
+}
+
+:root[data-theme='dark'] .collection-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(31, 20, 24, 0.18), rgba(31, 20, 24, 0.44)),
+    repeating-linear-gradient(90deg, rgba(255, 243, 239, 0.035) 0 1px, transparent 1px 90px);
+}
+
+:root[data-theme='dark'] .collection-hero-fallback {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(229, 183, 191, 0.18), transparent 25%),
+    radial-gradient(circle at 82% 14%, rgba(142, 101, 113, 0.28), transparent 30%),
+    radial-gradient(circle at 50% 96%, rgba(185, 121, 137, 0.2), transparent 38%),
+    linear-gradient(135deg, #17284d 0%, #223869 50%, #101b34 100%);
+}
+
+:root[data-theme='dark'] .not-found-code {
+  color: rgba(255, 243, 239, 0.09);
+}
+
+.catalog-page .products-listing-hero-panel.hero-panel-editorial .catalog-hero-image-card > span,
+.catalog-page .products-listing-hero-panel.hero-panel-editorial .catalog-hero-image-card > strong,
+.catalog-page .products-listing-hero-panel.hero-panel-editorial .catalog-hero-image-card > p {
+  color: #fffdf9;
+  text-shadow: 0 2px 14px rgba(23, 40, 77, 0.42);
+}
+
+.catalog-page .products-listing-hero-panel .hero-copy .section-eyebrow,
+.catalog-page .products-listing-hero-panel .hero-copy h1,
+.catalog-page .products-listing-hero-panel .hero-copy p {
+  color: #fffdf9;
+}
+
+.catalog-page .products-listing-hero-panel .hero-copy .section-eyebrow {
+  color: var(--accent);
+}
+
+.catalog-page .products-listing-hero-panel .hero-copy p {
+  color: rgba(255, 253, 249, 0.84);
+}
+
+@media (max-width: 480px) {
+  .checkout-path,
+  .checkout__path,
+  .home-quick-strip,
+  .home__quick-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .product-meta,
+  .summary-totals div,
+  .summary-grand-total,
+  .checkout-item {
+    gap: 6px;
+  }
+}
+
+

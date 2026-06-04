@@ -1,0 +1,130 @@
+$blue: #22386A;
+$blue-dark: #17284D;
+$gold: #C8A96A;
+$white: #fffdf9;
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.spinner--fs {
+  min-height: auto;
+}
+
+.spinner__text {
+  font-size: 0.85rem;
+  color: rgba(255, 253, 249, 0.8);
+  font-weight: 500;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.spinner__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(23, 40, 77, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.spinner__ring {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(200, 169, 106, 0.2);
+  border-top-color: $gold;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner__dual {
+  width: 40px;
+  height: 40px;
+  border: 4px solid transparent;
+  border-top-color: $white;
+  border-bottom-color: $gold;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.spinner__dots div {
+  width: 12px;
+  height: 12px;
+  background: $white;
+  border-radius: 50%;
+  animation: bounce 0.5s alternate infinite cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.spinner__dots div:nth-child(2) { animation-delay: 0.15s; }
+.spinner__dots div:nth-child(3) { animation-delay: 0.3s; }
+
+.spinner__dots-scale {
+  display: flex;
+  gap: 6px;
+}
+
+.spinner__dots-scale div {
+  width: 12px;
+  height: 12px;
+  background: $white;
+  border-radius: 50%;
+  animation: dot-scale 1s infinite ease-in-out both;
+}
+
+.spinner__dots-scale div:nth-child(1) { animation-delay: -0.3s; }
+.spinner__dots-scale div:nth-child(2) { animation-delay: -0.15s; }
+
+.spinner__bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(200, 169, 106, 0.25);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.spinner__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: $gold;
+  border-radius: 3px;
+  animation: slide 1s infinite ease-in-out alternate;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12px); }
+}
+
+@keyframes dot-scale {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

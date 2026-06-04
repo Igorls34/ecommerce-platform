@@ -1,0 +1,119 @@
+/* ===== Store Footer ===== */
+.store-footer {
+  margin-top: 24px;
+  padding: 44px 32px 28px;
+  color: var(--color-bg-brand-bege);
+  background:
+    radial-gradient(circle at 92% 0%, rgba(200, 169, 106, 0.24), transparent 30%),
+    linear-gradient(135deg, #17284d, #223869);
+  overflow-x: clip;
+}
+
+.store-footer-inner {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(240px, 1.2fr) minmax(180px, 0.7fr) minmax(220px, 0.8fr);
+  gap: 32px;
+  align-items: start;
+  max-width: 100%;
+}
+
+.store-footer-brand,
+.store-footer-contact,
+.store-footer-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.store-footer-wordmark {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.brand-logo-placeholder--footer {
+  width: min(220px, 100%);
+  max-height: 76px;
+}
+
+.store-footer-brand p {
+  max-width: 42ch;
+  margin: 0;
+  color: rgba(246, 241, 235, 0.76);
+}
+
+.store-footer-nav a,
+.store-footer-contact a,
+.store-footer-contact span {
+  width: fit-content;
+  color: rgba(246, 241, 235, 0.84);
+}
+
+.store-footer-contact span {
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(200, 169, 106, 0.86);
+}
+
+.store-footer-nav a,
+.store-footer-contact a {
+  transition:
+    color 220ms var(--ease-standard),
+    transform 220ms var(--ease-out-soft);
+}
+
+.store-footer-contact .store-footer-social-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.store-footer-social-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.store-footer-nav a:hover,
+.store-footer-contact a:hover {
+  color: #fffdf9;
+  transform: translateX(3px);
+}
+
+.store-footer-bottom {
+  width: min(1200px, 100%);
+  margin: 34px auto 0;
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(200, 169, 106, 0.24);
+  color: rgba(246, 241, 235, 0.66);
+  font-size: 0.82rem;
+  max-width: 100%;
+}
+
+.store-footer-bottom a {
+  color: inherit;
+}
+
+.store-footer-legal-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.store-footer-legal-links a:hover {
+  color: #fffdf9;
+}
+
+

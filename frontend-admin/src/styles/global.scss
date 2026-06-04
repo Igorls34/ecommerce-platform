@@ -1,0 +1,18 @@
+@use 'settings/tokens';
+@use 'base/reset';
+@use 'pages/auth';
+@use 'components/forms-buttons';
+@use 'layout/admin-shell';
+@use 'pages/dashboard';
+@use 'components/tables-feedback';
+@use 'pages/categories-orders';
+@use 'responsive/base-breakpoints';
+@use 'pages/products-orders';
+@use 'responsive/detail-breakpoints';
+@use 'components/design-polish';
+@use 'components/admin-color-polish';
+@use 'components/loading';
+
+@tailwind utilities;
+
+

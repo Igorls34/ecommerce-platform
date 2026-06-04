@@ -1,0 +1,171 @@
+/* ===== Reset ===== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text-primary);
+  background: var(--page-bg);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Performance: contain for key layout containers */
+.store__header,
+.store__footer,
+.store__main,
+.product-card,
+.editorial-category-card,
+.home__hero {
+  contain: layout style;
+}
+
+/* Performance: will-change for animated elements */
+.product-image,
+.editorial-category-image,
+.store-nav-link,
+.button-primary,
+.button-secondary {
+  will-change: transform;
+}
+
+.store-header {
+  will-change: background, box-shadow, padding;
+}
+
+.store,
+.store__header,
+.store__header-actions,
+.store__nav,
+.store__main,
+.store__footer,
+.store__footer-inner,
+.store__footer-bottom,
+.home,
+.home__hero,
+.home__hero-content,
+.home__hero-content-col,
+.home__hero-actions,
+.home__quick-strip,
+.home__category-grid,
+.home__featured-grid,
+.cart,
+.cart__layout,
+.cart__panel,
+.cart__list,
+.cart__item,
+.cart__item-copy,
+.cart__item-total,
+.cart__summary,
+.cart__summary-actions,
+.checkout,
+.checkout__layout,
+.checkout__panel,
+.checkout__path,
+.order-summary,
+.order-summary__product-list,
+.order-summary__product,
+.order-summary__totals,
+.order-summary__grand-total {
+  min-width: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes page-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes media-soft-zoom {
+  from {
+    transform: scale(1.045);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes text-soft-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cart-pill-bump {
+  0% {
+    transform: scale(1);
+  }
+
+  38% {
+    transform: scale(1.18);
+    background: var(--color-bg-brand-vinho);
+    color: #fff;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+

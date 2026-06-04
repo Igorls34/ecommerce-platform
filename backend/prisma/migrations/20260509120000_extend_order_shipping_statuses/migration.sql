@@ -1,0 +1,12 @@
+ALTER TABLE `Order`
+  MODIFY `status` ENUM(
+    'PENDING',
+    'PAID',
+    'PREPARING',
+    'PACKED',
+    'LABEL_GENERATED',
+    'POSTED',
+    'SHIPPED',
+    'DELIVERED',
+    'CANCELED'
+  ) NOT NULL DEFAULT 'PENDING';

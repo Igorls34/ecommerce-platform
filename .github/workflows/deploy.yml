@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH into VPS and deploy
+        run: |
+          for i in 1 2 3; do
+            echo "Tentativa $i..."
+            ssh -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20 -o ServerAliveInterval=10 root@2.24.124.93 "
+              set -e
+              cd /var/www/thessara
+              git reset --hard HEAD
+              git pull origin main
+              npm --prefix backend install
+              npm --prefix backend run build
+              npm --prefix backend run migrate:deploy
+              npm --prefix frontend-store install
+              export \$(grep -v '^#' backend/.env | grep '^VITE_' | xargs) 2>/dev/null || true
+              VITE_STORE_API_URL=/store VITE_SITE_URL=https://thessarasemijoias.com.br npm --prefix frontend-store run build
+              npm --prefix frontend-admin install
+              VITE_API_URL=/admin VITE_STORE_PUBLIC_URL=https://thessarasemijoias.com.br npm --prefix frontend-admin run build
+              pm2 reload thessara-api
+              sudo systemctl reload nginx
+            " && echo "Deploy OK" && exit 0
+            echo "Falhou, aguardando 15s..."
+            sleep 15
+          done
+          echo "3 tentativas falharam" >&2
+          exit 1

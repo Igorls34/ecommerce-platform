@@ -1,0 +1,40 @@
+{
+  "name": "projeto-site-eliane",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node scripts/start-local.js",
+    "dev:store": "npm --prefix frontend-store run dev -- --host 0.0.0.0 --port 5600",
+    "build:store": "npm --prefix frontend-store run build",
+    "build:admin": "npm --prefix frontend-admin run build",
+    "build:backend": "npm --prefix backend run build",
+    "build:all": "npm --prefix backend run build && npm --prefix frontend-store run build && npm --prefix frontend-admin run build",
+    "share": "iniciar-compartilhamento.bat",
+    "share:stop": "node scripts/stop-share.js",
+    "stripe:login": "powershell -ExecutionPolicy Bypass -File scripts/stripe-cli.ps1 login",
+    "stripe:listen": "powershell -ExecutionPolicy Bypass -File scripts/stripe-listen.ps1",
+    "stripe:trigger:paid": "powershell -ExecutionPolicy Bypass -File scripts/stripe-cli.ps1 trigger payment_intent.succeeded",
+    "stripe:version": "powershell -ExecutionPolicy Bypass -File scripts/stripe-cli.ps1 --version",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "npm --prefix backend test && npm --prefix frontend-admin test && npx playwright test",
+    "test:browser": "npx playwright test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.59.1",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.5.0",
+    "prettier": "^3.8.3",
+    "typescript-eslint": "^8.59.1"
+  }
+}

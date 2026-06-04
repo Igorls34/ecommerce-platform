@@ -1,0 +1,3 @@
+ALTER TABLE `Product`
+  ADD COLUMN `imageKey` VARCHAR(191) NULL,
+  ADD COLUMN `imageProvider` VARCHAR(191) NULL;

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto | Painel Administrativo</title>
+  <link rel="stylesheet" href="../styles/global.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar-brand">
+        <span class="brand-kicker">MVP</span>
+        <h1>Painel Admin</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="produtos.html" class="nav-link">Produtos</a>
+        <a href="produto-form.html" class="nav-link is-active" aria-current="page">Novo Produto</a>
+      </nav>
+    </aside>
+
+    <div class="content-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2 id="formPageTitle">Novo Produto</h2>
+        </div>
+        <button type="button" class="button button-secondary" id="logoutButton">Sair</button>
+      </header>
+
+      <main class="page">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 id="formTitle">Cadastrar produto</h3>
+              <p class="muted">Preencha os campos para salvar um item no catálogo.</p>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <form id="productForm" class="form-layout">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Nome</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="field">
+                  <label for="price">Preço</label>
+                  <input type="number" id="price" name="price" min="0" step="0.01" required>
+                </div>
+
+                <div class="field">
+                  <label for="stock">Estoque</label>
+                  <input type="number" id="stock" name="stock" min="0" step="1" required>
+                </div>
+
+                <div class="field">
+                  <label for="categoryId">Categoria ID</label>
+                  <input type="number" id="categoryId" name="categoryId" min="1" step="1" value="1" required>
+                </div>
+
+                <div class="field field-full">
+                  <label for="imageFile">Upload da imagem</label>
+                  <input type="file" id="imageFile" name="imageFile" accept="image/*">
+                </div>
+
+                <div class="field field-full">
+                  <label for="imageUrl">URL da imagem</label>
+                  <input type="url" id="imageUrl" name="imageUrl" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+
+                <div class="field field-full">
+                  <label>Pré-visualização</label>
+                  <div class="image-preview-wrapper">
+                    <img id="imagePreview" class="image-preview" alt="Pré-visualização da imagem do produto" hidden>
+                    <p id="imagePreviewPlaceholder" class="muted">Nenhuma imagem selecionada.</p>
+                    <p id="imageUploadHint" class="muted">A imagem será enviada ao storage configurado no backend.</p>
+                  </div>
+                </div>
+
+                <div class="field field-full">
+                  <label for="description">Descrição</label>
+                  <textarea id="description" name="description" placeholder="Descreva o produto"></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a href="produtos.html" class="button button-secondary">Cancelar</a>
+                <button type="submit" class="button button-primary" id="submitButton">Salvar produto</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../services/api.js" defer></script>
+  <script src="produto-form.js" defer></script>
+</body>
+</html>

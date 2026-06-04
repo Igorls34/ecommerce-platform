@@ -1,0 +1,65 @@
+/* ===== Base Tokens ===== */
+:root {
+  color-scheme: light;
+  --font-ui: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-elegant: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Elsie', 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1f2530;
+  background:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.16), transparent 32%),
+    radial-gradient(circle at top right, rgba(230, 213, 195, 0.72), transparent 28%),
+    linear-gradient(180deg, #f6f1eb 0%, #faf7f2 52%, #fffdf9 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-bg: #f6f1eb;
+  --color-surface: #fffdf9;
+  --color-surface-warm: #faf7f2;
+  --color-surface-soft: #e6d5c3;
+  --color-primary: #223869;
+  --color-primary-dark: #17284d;
+  --color-accent: #c8a96a;
+  --color-accent-soft: #e8d9b8;
+  --color-text: #1f2530;
+  --color-text-muted: #6f6a63;
+  --color-border: #e6d5c3;
+  --color-success: #3d6b4f;
+  --color-error: #a04444;
+  --color-warning: #a97832;
+
+  --color-bg-primary: var(--color-bg);
+  --color-bg-secondary: var(--color-surface-soft);
+  --color-ui-soft: var(--color-accent-soft);
+  --color-brand-primary: var(--color-primary);
+  --color-text-primary: var(--color-text);
+  --color-bg-brand-bege: var(--color-bg);
+  --color-bg-brand-roxo: var(--color-surface-soft);
+  --color-bg-brand-lilas: var(--color-accent-soft);
+  --color-bg-brand-vinho: var(--color-primary);
+  --color-bg-brand-vinho-escuro: var(--color-primary-dark);
+
+  --surface: rgba(255, 253, 249, 0.88);
+  --surface-strong: rgba(255, 253, 249, 0.96);
+  --border: rgba(230, 213, 195, 0.74);
+  --border-strong: rgba(34, 56, 106, 0.24);
+  --text-soft: var(--color-text-muted);
+  --text-faint: #9a9186;
+  --accent: var(--color-accent);
+  --accent-strong: var(--color-primary);
+  --accent-soft: var(--color-accent-soft);
+  --shadow: 0 22px 46px rgba(34, 56, 106, 0.08);
+  --page-bg:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.16), transparent 32%),
+    radial-gradient(circle at top right, rgba(230, 213, 195, 0.72), transparent 28%),
+    linear-gradient(180deg, #f6f1eb 0%, #faf7f2 46%, #fffdf9 100%);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+

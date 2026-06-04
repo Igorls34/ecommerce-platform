@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /carrinho
+Disallow: /entrar
+Disallow: /pedido-confirmado
+
+Sitemap: https://thessarasemijoias.com.br/sitemap.xml

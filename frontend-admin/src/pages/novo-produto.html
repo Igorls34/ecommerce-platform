@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Produto | Painel Administrativo</title>
+  <link rel="stylesheet" href="../styles/global.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar-brand">
+        <span class="brand-kicker">MVP</span>
+        <h1>Painel Admin</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="produtos.html" class="nav-link">Produtos</a>
+        <a href="novo-produto.html" class="nav-link is-active" aria-current="page">Novo Produto</a>
+      </nav>
+    </aside>
+
+    <div class="content-area">
+      <header class="topbar">
+        <a href="produtos.html" class="button button-secondary">Voltar</a>
+        <button type="button" class="button button-secondary" id="logoutButton">Sair</button>
+      </header>
+
+      <main class="page">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Catálogo</p>
+              <h2>Cadastro de Produto</h2>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <form id="productForm" class="form-layout">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Nome</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="field">
+                  <label for="price">Preço</label>
+                  <input type="number" id="price" name="price" step="0.01" min="0" required>
+                </div>
+
+                <div class="field">
+                  <label for="stock">Estoque</label>
+                  <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+
+                <div class="field">
+                  <label for="categoryId">ID da Categoria</label>
+                  <input type="number" id="categoryId" name="categoryId" min="1" value="1" required>
+                </div>
+
+                <div class="field field-full">
+                  <label for="description">Descrição</label>
+                  <textarea id="description" name="description" required></textarea>
+                </div>
+
+                <div class="field field-full">
+                  <label for="image">Imagem</label>
+                  <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="button button-primary" id="submitButton">Salvar Produto</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="novo-produto.js"></script>
+</body>
+</html>

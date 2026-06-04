@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Painel Administrativo</title>
+  <link rel="stylesheet" href="../styles/global.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar-brand">
+        <span class="brand-kicker">MVP</span>
+        <h1>Painel Admin</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link is-active" aria-current="page">Dashboard</a>
+        <a href="produtos.html" class="nav-link">Produtos</a>
+        <a href="novo-produto.html" class="nav-link">Novo Produto</a>
+      </nav>
+    </aside>
+
+    <div class="content-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Visão geral</p>
+          <h2>Dashboard</h2>
+        </div>
+        <button type="button" class="button button-secondary" id="logoutButton">Sair</button>
+      </header>
+
+      <main class="page">
+        <section class="stats-grid" aria-label="Resumo do catalogo">
+          <article class="stat-card">
+            <span class="muted">Total de produtos</span>
+            <strong id="totalProducts">--</strong>
+          </article>
+          <article class="stat-card">
+            <span class="muted">Itens em estoque</span>
+            <strong id="totalStock">--</strong>
+          </article>
+          <article class="stat-card">
+            <span class="muted">Estoque baixo</span>
+            <strong id="lowStockCount">--</strong>
+          </article>
+          <article class="stat-card">
+            <span class="muted">Valor em estoque</span>
+            <strong id="inventoryValue">--</strong>
+          </article>
+        </section>
+
+        <section class="split-grid">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Produtos recentes</h3>
+                <p class="muted">Últimos itens encontrados no catálogo.</p>
+              </div>
+              <a href="produtos.html" class="button button-secondary">Ver todos</a>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Estoque</th>
+                </tr>
+              </thead>
+              <tbody id="recentProductsTableBody">
+                <tr>
+                  <td colspan="4" class="table-message">Carregando...</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <aside class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Ações rápidas</h3>
+                <p class="muted">Atalhos para operação do catálogo.</p>
+              </div>
+            </div>
+
+            <div class="panel-body list-stack">
+              <a href="novo-produto.html" class="button button-primary">Cadastrar novo produto</a>
+              <a href="produtos.html" class="button button-secondary">Gerenciar produtos</a>
+              <div class="list-item">
+                <strong>Fluxo do painel</strong>
+                <p class="muted">Cadastro, edição, exclusão e acesso autenticado funcionam via API Express com JWT.</p>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../services/api.js" defer></script>
+  <script src="dashboard.js" defer></script>
+</body>
+</html>

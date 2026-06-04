@@ -1,0 +1,8 @@
+/* ===== Shared Page Sections ===== */
+.page-stack {
+  display: grid;
+  gap: 24px;
+  animation: page-rise-in 620ms var(--ease-out-soft) both;
+}
+
+

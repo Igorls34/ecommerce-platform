@@ -677,67 +677,57 @@ function renderDashboard() {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Painel de Compartilhamento</title>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #fff8f5;
-      --panel: #ffffff;
-      --soft: #f8ebe8;
-      --line: #edd7d3;
-      --text: #473734;
-      --muted: #7a6662;
-      --accent: #c9657b;
-      --ok: #4f8b67;
-      --warn: #c4953d;
-      --off: #b86868;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Segoe UI", sans-serif; background: linear-gradient(180deg, #fff8f5 0%, #fff1ec 100%); color: var(--text); }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; display: grid; gap: 20px; }
-    .hero, .panel { background: rgba(255,255,255,.92); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 18px 40px rgba(130, 92, 85, .08); }
-    .hero { padding: 28px; display: grid; gap: 12px; }
-    h1, h2, h3, p { margin: 0; }
-    .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-    .card { padding: 18px; border-radius: 20px; background: var(--panel); border: 1px solid var(--line); display: grid; gap: 8px; }
-    .status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; width: fit-content; background: var(--soft); color: var(--text); font-weight: 600; text-transform: capitalize; }
-    .status.online { color: var(--ok); }
-    .status.starting { color: var(--warn); }
-    .status.offline, .status.error, .status.stopped { color: var(--off); }
-    .value { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; overflow-wrap: anywhere; }
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    button, a.button { appearance: none; border: 0; cursor: pointer; border-radius: 14px; background: var(--accent); color: #fff; text-decoration: none; padding: 12px 16px; font-weight: 700; }
-    button:disabled { cursor: wait; opacity: .68; }
-    .secondary { background: #fff; color: var(--text); border: 1px solid var(--line); }
-    .panel { padding: 22px; display: grid; gap: 14px; }
-    .tool-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f5f5f5; color: #1a1a1a; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px; display: grid; gap: 18px; }
+    .hero { background: linear-gradient(135deg, #111, #1a1a2e); color: #fff; border-radius: 20px; padding: 32px 28px; display: grid; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.12); }
+    .hero h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
+    .hero .muted { color: rgba(255,255,255,.55); font-size: .88rem; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .card { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 16px; padding: 18px; display: grid; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+    .card h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: #888; }
+    .panel { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+    .panel h2 { font-size: 1.1rem; font-weight: 600; color: #111; }
+    .status { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: .8rem; font-weight: 600; text-transform: capitalize; background: #f3f4f6; color: #6b7280; width: fit-content; }
+    .status.online { background: #ecfdf5; color: #065f46; }
+    .status.starting { background: #fffbeb; color: #92400e; }
+    .status.offline, .status.error, .status.stopped { background: #fef2f2; color: #991b1b; }
+    .value { font-size: .85rem; background: #f9fafb; border: 1px solid #eee; border-radius: 12px; padding: 12px 14px; overflow-wrap: anywhere; color: #333; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    button, a.button { appearance: none; border: 0; cursor: pointer; border-radius: 10px; background: #111; color: #fff; text-decoration: none; padding: 10px 18px; font-size: .85rem; font-weight: 600; font-family: inherit; transition: .15s; }
+    button:hover, a.button:hover { background: #000; }
+    button:disabled { cursor: wait; opacity: .6; }
+    .secondary { background: #fff; color: #111; border: 1px solid #ddd; }
+    .secondary:hover { background: #f5f5f5; }
+    .tool-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .tool-result { display: none; white-space: pre-wrap; }
-    .tool-result.is-visible { display: block; }
-    .tool-result.is-ok { border-color: rgba(79, 139, 103, .28); color: var(--ok); }
-    .tool-result.is-error { border-color: rgba(184, 104, 104, .32); color: var(--off); }
-    .tool-result.is-running { border-color: rgba(196, 149, 61, .32); color: var(--warn); }
-    .config-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
-    .config-group { border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 12px; background: rgba(255,255,255,.72); }
-    .config-group h3 { font-size: 1rem; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-    .config-field { display: grid; gap: 6px; }
-    .config-field label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
-    .config-field input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font: inherit; color: var(--text); background: #fff; }
-    .config-field small { color: var(--muted); line-height: 1.35; }
-    .config-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-    .config-notice { border-left: 4px solid var(--warn); background: #fffaf0; }
-    ul { margin: 0; padding-left: 18px; color: var(--muted); }
-    .mono { font-family: Consolas, monospace; }
-    @media (max-width: 900px) { .grid, .config-grid { grid-template-columns: 1fr; } .wrap { padding: 16px; } }
+    .tool-result.is-visible { display: block; border-color: #e5e5e5; background: #fafafa; }
+    .config-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .config-group { border: 1px solid #eee; border-radius: 14px; padding: 16px; display: grid; gap: 12px; background: #fafafa; }
+    .config-group h3 { font-size: .9rem; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid #eee; color: #111; }
+    .config-field { display: grid; gap: 5px; }
+    .config-field label { color: #666; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+    .config-field input { width: 100%; border: 1px solid #e5e5e5; border-radius: 10px; padding: 9px 12px; font: inherit; font-size: .85rem; color: #1a1a1a; background: #fff; }
+    .config-field input:focus { border-color: #111; outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,.06); }
+    .config-field small { color: #888; font-size: .75rem; line-height: 1.4; }
+    .config-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .config-notice { border-left: 4px solid #f59e0b; background: #fffbeb; color: #92400e; }
+    .muted { color: #888; font-size: .85rem; line-height: 1.5; }
+    p { margin: 0; }
+    .mono { font-family: 'SF Mono', Consolas, monospace; font-size: .82rem; }
+    strong { color: #111; }
+    @media (max-width: 800px) { .grid, .config-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <p class="muted">Compartilhamento local para demonstracao</p>
-      <h1>Painel de Acesso do Cliente</h1>
-      <p class="muted">Use esta tela para copiar as URLs publicas, validar os servicos e abrir rapidamente o sistema.</p>
+      <h1>Painel de Compartilhamento</h1>
+      <p class="muted">URLs públicas para demonstração. Copie os links e compartilhe com o cliente.</p>
       <div class="actions">
-        <a id="public-link" class="button" href="#" target="_blank" rel="noreferrer noopener">Abrir admin publico</a>
-        <a id="store-public-link" class="button secondary" href="#" target="_blank" rel="noreferrer noopener">Abrir loja publica</a>
+        <a id="public-link" class="button" href="#" target="_blank" rel="noreferrer noopener">Abrir Admin</a>
+        <a id="store-public-link" class="button secondary" href="#" target="_blank" rel="noreferrer noopener">Abrir Loja</a>
         <a id="store-link" class="button secondary" href="http://localhost:5600" target="_blank" rel="noreferrer noopener">Abrir loja local</a>
         <button id="copy-url" class="secondary">Copiar URL admin</button>
         <button id="copy-store-url" class="secondary">Copiar URL loja</button>

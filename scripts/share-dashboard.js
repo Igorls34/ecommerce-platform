@@ -11,31 +11,6 @@ const NGROK_ERR_LOG_PATH = path.join(RUNTIME_DIR, 'ngrok.err.log');
 const NGROK_OUT_LOG_PATH = path.join(RUNTIME_DIR, 'ngrok.out.log');
 const BACKEND_ENV_PATH = path.join(ROOT_DIR, 'backend', '.env');
 
-const EDITABLE_CONFIG_FIELDS = [
-  { key: 'MELHOR_ENVIO_API_URL', label: 'Ambiente da API', group: 'Melhor Envio', hint: 'Sandbox ou produção.' },
-  { key: 'MELHOR_ENVIO_DEFAULT_SERVICE_ID', label: 'Serviço padrão', group: 'Melhor Envio', hint: 'Usado quando o pedido nao tem servico salvo.' },
-  { key: 'MELHOR_ENVIO_USER_AGENT', label: 'User-Agent', group: 'Melhor Envio', hint: 'Identificação exigida pela API.' },
-  { key: 'STORE_SENDER_NAME', label: 'Nome', group: 'Remetente - contato', hint: 'Nome impresso como remetente.' },
-  { key: 'STORE_SENDER_EMAIL', label: 'E-mail', group: 'Remetente - contato', hint: 'Contato da loja/remetente.' },
-  { key: 'STORE_SENDER_PHONE', label: 'Telefone', group: 'Remetente - contato', hint: 'Apenas numeros com DDD.' },
-  { key: 'STORE_SENDER_DOCUMENT', label: 'CPF', group: 'Remetente - documentos', hint: 'Use CPF ou CNPJ conforme sua conta.' },
-  { key: 'STORE_SENDER_COMPANY_DOCUMENT', label: 'CNPJ', group: 'Remetente - documentos', hint: 'Opcional se usa CPF.' },
-  { key: 'STORE_SENDER_STATE_REGISTER', label: 'Inscrição estadual', group: 'Remetente - documentos', hint: 'Número ou ISENTO quando aplicável.' },
-  { key: 'STORE_ZIP_CODE', label: 'CEP de origem', group: 'Remetente - endereço', hint: 'CEP usado no calculo de frete.' },
-  { key: 'STORE_SENDER_ADDRESS', label: 'Logradouro', group: 'Remetente - endereço', hint: 'Rua/avenida/travessa.' },
-  { key: 'STORE_SENDER_NUMBER', label: 'Número', group: 'Remetente - endereço', hint: 'Número do remetente.' },
-  { key: 'STORE_SENDER_COMPLEMENT', label: 'Complemento', group: 'Remetente - endereço', hint: 'Opcional.' },
-  { key: 'STORE_SENDER_DISTRICT', label: 'Bairro', group: 'Remetente - endereço', hint: 'Bairro do remetente.' },
-  { key: 'STORE_SENDER_CITY', label: 'Cidade', group: 'Remetente - endereço', hint: 'Cidade do remetente.' },
-  { key: 'STORE_SENDER_STATE', label: 'UF', group: 'Remetente - endereço', hint: 'Ex.: RJ.' },
-  { key: 'STORE_STATE', label: 'UF da loja', group: 'Remetente - endereço', hint: 'Fallback para UF de origem.' },
-  { key: 'STORE_WEIGHT', label: 'Peso (kg)', group: 'Pacote padrão', hint: 'Peso usado na etiqueta.' },
-  { key: 'STORE_LENGTH', label: 'Comprimento (cm)', group: 'Pacote padrão', hint: 'Comprimento da caixa.' },
-  { key: 'STORE_WIDTH', label: 'Largura (cm)', group: 'Pacote padrão', hint: 'Largura da caixa.' },
-  { key: 'STORE_HEIGHT', label: 'Altura (cm)', group: 'Pacote padrão', hint: 'Altura da caixa.' },
-  { key: 'STORE_INSURANCE_VALUE', label: 'Seguro (R$)', group: 'Pacote padrão', hint: 'Valor padrao para simulações de frete.' },
-];
-
 const BACKEND_PORT = 3333;
 const FRONTEND_PORT = 5500;
 const STORE_PORT = 5600;
@@ -750,46 +725,18 @@ function renderDashboard() {
     </section>
     <section class="panel">
       <h2>Dados de Teste</h2>
-      <p class="muted">Popule o banco local com categorias e produtos demonstrativos para visualizar a loja cheia.</p>
       <div class="tool-row">
-        <button id="seed-demo" type="button">Popular banco de teste</button>
-        <button id="clear-demo" class="secondary" type="button">Limpar produtos de teste</button>
-        <span class="muted">Cria/atualiza 7 categorias e 42 produtos.</span>
+        <button id="seed-demo" type="button">Popular banco</button>
+        <button id="clear-demo" class="secondary" type="button">Limpar dados</button>
       </div>
       <div id="seed-result" class="value tool-result mono"></div>
     </section>
     <section class="panel">
-      <h2>Configuracoes Operacionais</h2>
-      <p class="muted">Edite dados usados pelo backend em frete, remetente e Melhor Envio. Tokens e senhas continuam protegidos no arquivo .env.</p>
-      <div class="value config-notice">
-        <strong>Aplicacao das mudancas</strong>
-        <div>Salvar atualiza o arquivo <span class="mono">backend/.env</span>. Para o backend usar os novos valores, encerre e inicie o compartilhamento novamente.</div>
+      <h2>Informações</h2>
+      <div class="value">
+        <p class="muted">O PC precisa ficar ligado para a URL pública funcionar. Ao reiniciar o ngrok, a URL muda.</p>
+        <p class="muted" style="margin-top:6px">Para encerrar: <span class="mono">npm run share:stop</span></p>
       </div>
-      <form id="config-form" class="config-grid"></form>
-      <div class="config-actions">
-        <button id="save-config" type="button">Salvar configuracoes</button>
-        <button id="reload-config" type="button" class="secondary">Recarregar configuracoes</button>
-        <span class="muted">Reinicie o compartilhamento apos salvar para o backend carregar os novos valores.</span>
-      </div>
-      <div id="config-result" class="value tool-result mono"></div>
-    </section>
-    <section class="panel">
-      <h2>Testes Visiveis</h2>
-      <p class="muted">Abre o navegador do Playwright para voce acompanhar os fluxos testados no admin e na loja.</p>
-      <div class="tool-row">
-        <button id="run-visible-tests" type="button">Rodar testes visiveis</button>
-        <span class="muted">Executa <span class="mono">npx playwright test --headed --workers=1</span>.</span>
-      </div>
-      <div id="test-result" class="value tool-result mono"></div>
-    </section>
-    <section class="panel">
-      <h2>Observacoes</h2>
-      <ul>
-        <li>Seu PC precisa ficar ligado e conectado para a URL publica continuar funcionando.</li>
-        <li>Se reiniciar o ngrok, a URL publica muda.</li>
-        <li>Para encerrar tudo, execute <span class="mono">parar-compartilhamento.bat</span>.</li>
-        <li>A loja publica esta incluida no compartilhamento local para facilitar seu trabalho de front-end.</li>
-      </ul>
     </section>
   </div>
   <script>
@@ -846,8 +793,6 @@ function renderDashboard() {
       alert('URL publica da loja copiada.');
     });
     document.getElementById('refresh').addEventListener('click', loadStatus);
-    document.getElementById('reload-config').addEventListener('click', loadConfig);
-    document.getElementById('save-config').addEventListener('click', saveConfig);
     document.getElementById('seed-demo').addEventListener('click', () => runDemoTool({
       buttonId: 'seed-demo',
       endpoint: '/api/seed-demo',
@@ -861,117 +806,11 @@ function renderDashboard() {
       buttonId: 'clear-demo',
       endpoint: '/api/clear-demo',
       busyText: 'Limpando...',
-      idleText: 'Limpar produtos de teste',
-      startText: 'Removendo produtos demo e preservando categorias oficiais...',
-      fallbackSuccess: 'Produtos de teste removidos com sucesso.',
-      fallbackError: 'Não foi possível limpar os produtos de teste.',
+      idleText: 'Limpar dados',
+      startText: 'Removendo produtos demo...',
+      fallbackSuccess: 'Dados removidos.',
+      fallbackError: 'Erro ao limpar.',
     }));
-    document.getElementById('run-visible-tests').addEventListener('click', runVisibleTests);
-
-    async function loadConfig() {
-      const resultNode = document.getElementById('config-result');
-
-      try {
-        const response = await fetch('/api/config', { cache: 'no-store' });
-        const data = await response.json();
-        renderConfigForm(data.fields || [], data.values || {});
-        resultNode.className = 'value tool-result is-visible is-ok mono';
-        resultNode.textContent = data.note || 'Configurações carregadas.';
-      } catch (error) {
-        resultNode.className = 'value tool-result is-visible is-error mono';
-        resultNode.textContent = error.message || 'Não foi possível carregar as configuracoes.';
-      }
-    }
-
-    function renderConfigForm(fields, values) {
-      const form = document.getElementById('config-form');
-      const groups = fields.reduce((map, field) => {
-        const group = field.group || 'Geral';
-        map[group] = map[group] || [];
-        map[group].push(field);
-        return map;
-      }, {});
-
-      form.innerHTML = Object.entries(groups)
-        .map(([group, groupFields]) => (
-          '<div class="config-group"><h3>' +
-          escapeHtml(group) +
-          '</h3>' +
-          groupFields
-            .map((field) => (
-              '<div class="config-field">' +
-              '<label for="cfg-' +
-              escapeHtml(field.key) +
-              '">' +
-              escapeHtml(field.label) +
-              '</label>' +
-              '<input id="cfg-' +
-              escapeHtml(field.key) +
-              '" name="' +
-              escapeHtml(field.key) +
-              '" value="' +
-              escapeAttribute(values[field.key] || '') +
-              '" />' +
-              '<small>' +
-              escapeHtml(field.hint || field.key) +
-              '</small>' +
-              '</div>'
-            ))
-            .join('') +
-          '</div>'
-        ))
-        .join('');
-    }
-
-    async function saveConfig() {
-      const button = document.getElementById('save-config');
-      const resultNode = document.getElementById('config-result');
-      const values = {};
-
-      for (const input of document.querySelectorAll('#config-form input[name]')) {
-        values[input.name] = input.value;
-      }
-
-      button.disabled = true;
-      resultNode.className = 'value tool-result is-visible is-running mono';
-      resultNode.textContent = 'Salvando configurações...';
-
-      try {
-        const response = await fetch('/api/config', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ values }),
-        });
-        const data = await response.json();
-
-        if (!response.ok || !data.ok) {
-          throw new Error(data.error || 'Não foi possível salvar as configuracoes.');
-        }
-
-        renderConfigForm(data.config.fields || [], data.config.values || {});
-        resultNode.className = 'value tool-result is-visible is-ok mono';
-        resultNode.textContent = 'Configurações salvas. Reinicie o compartilhamento para aplicar no backend.';
-      } catch (error) {
-        resultNode.className = 'value tool-result is-visible is-error mono';
-        resultNode.textContent = error.message || 'Não foi possível salvar as configuracoes.';
-      } finally {
-        button.disabled = false;
-      }
-    }
-
-    function escapeHtml(value) {
-      return String(value || '').replace(/[&<>"']/g, (char) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;',
-      }[char]));
-    }
-
-    function escapeAttribute(value) {
-      return escapeHtml(value).replace(new RegExp(String.fromCharCode(96), 'g'), '&#96;');
-    }
 
     async function runDemoTool(config) {
       const button = document.getElementById(config.buttonId);
@@ -1002,36 +841,7 @@ function renderDashboard() {
       }
     }
 
-    async function runVisibleTests() {
-      const button = document.getElementById('run-visible-tests');
-      const resultNode = document.getElementById('test-result');
-
-      button.disabled = true;
-      button.textContent = 'Rodando testes...';
-      resultNode.className = 'value tool-result is-visible is-running mono';
-      resultNode.textContent = 'Abrindo navegador do Playwright. Aguarde o fluxo terminar...';
-
-      try {
-        const response = await fetch('/api/run-visible-tests', { method: 'POST' });
-        const data = await response.json();
-
-        if (!response.ok || !data.ok) {
-          throw new Error(data.error || data.output || 'Não foi possível executar os testes visiveis.');
-        }
-
-        resultNode.className = 'value tool-result is-visible is-ok mono';
-        resultNode.textContent = data.output || 'Testes visiveis finalizados com sucesso.';
-      } catch (error) {
-        resultNode.className = 'value tool-result is-visible is-error mono';
-        resultNode.textContent = error.message || 'Não foi possível executar os testes visiveis.';
-      } finally {
-        button.disabled = false;
-        button.textContent = 'Rodar testes visiveis';
-      }
-    }
-
     loadStatus();
-    loadConfig();
     setInterval(loadStatus, 4000);
   </script>
 </body>

@@ -443,4 +443,19 @@
   letter-spacing: -0.08em;
 }
 
+// Dark sidebar
+.sidebar[style*="background: #111"] {
+  border-right-color: #222;
+
+  .nav-link {
+    color: rgba(255,255,255,0.55);
+    &:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    &.is-active { background: rgba(255,255,255,0.1); color: #fff; border-color: transparent; }
+  }
+
+  .brand-block {
+    background: rgba(255,255,255,0.06);
+  }
+}
+
 

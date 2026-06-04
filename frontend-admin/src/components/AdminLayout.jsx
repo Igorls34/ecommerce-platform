@@ -111,13 +111,10 @@ export function AdminLayout({ title, subtitle, actions, children }) {
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+       <aside className="sidebar" style={{ background: '#111', color: '#fff' }}>
         <div className="brand-block">
-          <img
-            src={brandAssets.symbolBlue}
-            alt={brand.name}
-          />
-          <h1 className="brand-title">{brand.name}</h1>
+          <img src={brandAssets.logo} alt={brand.name} style={{ width: 40, height: 40 }} />
+          <h1 className="brand-title" style={{ color: '#fff' }}>{brand.name}</h1>
         </div>
 
         <nav className="sidebar-nav">
@@ -142,19 +139,10 @@ export function AdminLayout({ title, subtitle, actions, children }) {
         </nav>
 
         <div className="sidebar-footer">
-          <a
-            className="button button-primary sidebar-store-link"
-            href={STORE_PUBLIC_URL}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a className="button button-primary sidebar-store-link" href={STORE_PUBLIC_URL} target="_blank" rel="noreferrer" style={{ background: '#333', borderColor: '#333' }}>
             Ver loja
           </a>
-          <button
-            type="button"
-            className="button button-secondary sidebar-logout"
-            onClick={handleLogout}
-          >
+          <button type="button" className="button button-secondary sidebar-logout" onClick={handleLogout} style={{ background: 'transparent', color: '#999', borderColor: '#444' }}>
             Sair
           </button>
         </div>

@@ -8,7 +8,7 @@ export const brandAssets = {
 export const brand = {
   name: 'Minha Loja',
   legalName: 'Minha Loja LTDA',
-  tagline: 'Produtos selecionados para você',
+  tagline: 'Produtos selecionados com qualidade.',
   domain: 'exemplo.com.br',
   storeUrl: 'https://exemplo.com.br',
   adminUrl: 'https://admin.exemplo.com.br',
@@ -32,10 +32,10 @@ export const brand = {
   },
 
   colors: {
-    primary: '#0d6efd',
-    primaryDark: '#0b5ed7',
-    accent: '#ffc107',
-    background: '#f8f9fa',
+    primary: '#111111',
+    primaryDark: '#000000',
+    accent: '#666666',
+    background: '#fafafa',
   },
 
   pix: {
@@ -46,8 +46,8 @@ export const brand = {
 
   seo: {
     ogImage: '/brand/og-logo-blue.png',
-    themeColor: '#0d6efd',
-    backgroundColor: '#f8f9fa',
+    themeColor: '#111111',
+    backgroundColor: '#fafafa',
   },
 
   payment: {

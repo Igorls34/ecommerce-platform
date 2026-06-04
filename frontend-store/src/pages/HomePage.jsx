@@ -4,37 +4,34 @@ import { brand } from '../lib/brandAssets';
 export function HomePage() {
   return (
     <>
-      <section className="hero-section text-center">
+      <section className="hero text-center">
         <div className="container">
           <h1>{brand.name}</h1>
-          <p className="mb-4">{brand.tagline}</p>
-          <div className="d-flex justify-content-center gap-3">
-            <Link className="btn btn-light btn-lg px-4" to="/produtos">Ver Produtos</Link>
-            <Link className="btn btn-outline-light btn-lg px-4" to="/conta">Minha Conta</Link>
+          <p className="mb-5">{brand.tagline}</p>
+          <div className="d-flex justify-content-center gap-3 flex-wrap">
+            <Link className="btn btn-light btn-lg" to="/produtos">Ver Produtos</Link>
+            <Link className="btn btn-outline-light btn-lg" to="/conta">Minha Conta</Link>
           </div>
         </div>
       </section>
 
       <section className="py-5">
-        <div className="container">
-          <div className="row text-center g-4">
-            <div className="col-md-4">
-              <div className="p-4">
-                <h3 className="h5">Peças Selecionadas</h3>
-                <p className="text-muted small">Curadoria de semijoias com design autoral e qualidade.</p>
-              </div>
+        <div className="container py-4">
+          <div className="row g-4 text-center">
+            <div className="col-md-4 feature">
+              <div className="feature-icon">✦</div>
+              <h5>Curadoria Exclusiva</h5>
+              <p>Produtos selecionados com os melhores fornecedores para garantir qualidade e estilo.</p>
             </div>
-            <div className="col-md-4">
-              <div className="p-4">
-                <h3 className="h5">Pagamento Fácil</h3>
-                <p className="text-muted small">PIX com 5% de desconto ou cartão de crédito à vista.</p>
-              </div>
+            <div className="col-md-4 feature">
+              <div className="feature-icon">⚡</div>
+              <h5>Pagamento Rápido</h5>
+              <p>PIX com 5% de desconto ou cartão de crédito à vista. Seguro e sem complicação.</p>
             </div>
-            <div className="col-md-4">
-              <div className="p-4">
-                <h3 className="h5">Envio para Todo Brasil</h3>
-                <p className="text-muted small">Entrega rápida e segura com código de rastreio.</p>
-              </div>
+            <div className="col-md-4 feature">
+              <div className="feature-icon">📦</div>
+              <h5>Entrega Nacional</h5>
+              <p>Enviamos para todo o Brasil com código de rastreio para você acompanhar.</p>
             </div>
           </div>
         </div>

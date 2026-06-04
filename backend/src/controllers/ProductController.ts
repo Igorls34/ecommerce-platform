@@ -307,7 +307,6 @@ export const getCatalogProducts = async (req: Request, res: Response) => {
     const products = await prisma.product.findMany({
       where: {
         visible: true,
-        imageUrl: { not: null },
         ...(Number.isNaN(categoryId) ? {} : { categoryId }),
         ...(search
           ? {

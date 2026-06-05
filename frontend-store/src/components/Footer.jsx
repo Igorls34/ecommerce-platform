@@ -28,19 +28,23 @@ export function Footer() {
           </div>
         </div>
         <hr style={{ borderColor: 'rgba(255,255,255,0.15)' }} />
-        <p className="text-center small mb-3">
+        <p className="text-center small mb-0">
           &copy; {new Date().getFullYear()} {brand.name} &mdash; Todos os direitos reservados.
         </p>
-        <div className="text-center d-flex justify-content-center gap-3 flex-wrap">
-          <a href="https://wa.me/5524992241855?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce." target="_blank" rel="noreferrer"
-            className="btn btn-sm" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: 10, border: '1px solid rgba(255,255,255,0.15)' }}>
-            💬 Falar com o desenvolvedor
-          </a>
-          <a href="https://igordev-portfolio-ofc.netlify.app/" target="_blank" rel="noreferrer"
-            className="btn btn-sm" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: 10, border: '1px solid rgba(255,255,255,0.15)' }}>
-            🚀 Ver portfólio
-          </a>
-        </div>
+      </div>
+
+      <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
+        <a href="https://wa.me/5524992241855?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce." target="_blank" rel="noreferrer"
+          className="btn btn-sm d-flex align-items-center gap-2 shadow"
+          style={{ background: '#25D366', color: '#fff', borderRadius: 50, padding: '10px 18px', fontWeight: 600, fontSize: '0.85rem' }}>
+          💬 Falar com o Dev
+        </a>
+        <a href="https://igordev-portfolio-ofc.netlify.app/" target="_blank" rel="noreferrer"
+          className="btn btn-sm d-flex align-items-center gap-2 shadow"
+          style={{ background: '#111', color: '#fff', borderRadius: 50, padding: '10px 18px', fontWeight: 600, fontSize: '0.85rem' }}>
+          🚀 Portfólio
+        </a>
+      </div>
       </div>
     </footer>
   );

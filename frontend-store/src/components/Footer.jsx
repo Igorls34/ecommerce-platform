@@ -28,9 +28,19 @@ export function Footer() {
           </div>
         </div>
         <hr style={{ borderColor: 'rgba(255,255,255,0.15)' }} />
-        <p className="text-center small mb-0">
+        <p className="text-center small mb-3">
           &copy; {new Date().getFullYear()} {brand.name} &mdash; Todos os direitos reservados.
         </p>
+        <div className="text-center d-flex justify-content-center gap-3 flex-wrap">
+          <a href="https://wa.me/5524992241855?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce." target="_blank" rel="noreferrer"
+            className="btn btn-sm" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: 10, border: '1px solid rgba(255,255,255,0.15)' }}>
+            💬 Falar com o desenvolvedor
+          </a>
+          <a href="https://igordev-portfolio-ofc.netlify.app/" target="_blank" rel="noreferrer"
+            className="btn btn-sm" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: 10, border: '1px solid rgba(255,255,255,0.15)' }}>
+            🚀 Ver portfólio
+          </a>
+        </div>
       </div>
     </footer>
   );

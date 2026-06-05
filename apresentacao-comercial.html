@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ecommerce Platform — Apresentação Comercial</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #1e293b; line-height: 1.6; }
+  .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 60px 80px; page-break-after: always; }
+  .slide:last-child { page-break-after: auto; }
+
+  .cover { background: linear-gradient(135deg, #0f172a, #1e293b, #312e81); color: #fff; text-align: center; }
+  .cover h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+  .cover .tagline { font-size: 1.25rem; color: #94a3b8; margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cover .badge { display: inline-block; padding: 8px 20px; border-radius: 50px; background: rgba(99,102,241,0.2); color: #a5b4fc; font-weight: 600; font-size: 0.85rem; margin-bottom: 24px; letter-spacing: 0.02em; }
+
+  .dark { background: #0f172a; color: #fff; }
+  .light { background: #f8fafc; }
+  .white { background: #fff; }
+
+  h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; color: #0f172a; }
+  .dark h2, .cover h2 { color: #fff; }
+  h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+  p { color: #64748b; font-size: 1rem; max-width: 680px; }
+  .dark p, .cover p { color: #94a3b8; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .dark .card { background: #1e293b; border-color: rgba(255,255,255,0.06); }
+  .dark .card p { color: #94a3b8; }
+  .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .card h3 { font-size: 1rem; color: #0f172a; }
+  .dark .card h3 { color: #fff; }
+  .card p { font-size: 0.88rem; }
+
+  .metric { text-align: center; padding: 20px; }
+  .metric .value { font-size: 2.5rem; font-weight: 800; color: #6366f1; line-height: 1; }
+  .dark .metric .value { color: #818cf8; }
+  .metric .label { font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 6px; font-weight: 600; }
+
+  .step { display: flex; gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .dark .step { border-color: rgba(255,255,255,0.06); }
+  .step-num { width: 44px; height: 44px; border-radius: 12px; background: #6366f1; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+  .step h3 { margin-bottom: 2px; }
+
+  .price-box { background: #fff; border: 2px solid #6366f1; border-radius: 20px; padding: 28px; text-align: center; box-shadow: 0 8px 30px rgba(99,102,241,0.1); }
+  .price-box .amount { font-size: 3rem; font-weight: 800; color: #0f172a; }
+  .price-box .period { color: #64748b; font-size: 0.9rem; }
+
+  .footer-note { font-size: 0.75rem; color: #94a3b8; margin-top: 40px; text-align: center; }
+
+  .highlight { color: #6366f1; font-weight: 600; }
+  .tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; }
+  .tag-green { background: #ecfdf5; color: #065f46; }
+  .tag-blue { background: #eff6ff; color: #1e40af; }
+  .tag-purple { background: #f5f3ff; color: #5b21b6; }
+
+  .check-list { list-style: none; margin-top: 12px; }
+  .check-list li { padding: 6px 0; color: #64748b; font-size: 0.92rem; }
+  .check-list li::before { content: '✓ '; color: #6366f1; font-weight: 700; }
+
+  @media (max-width: 800px) {
+    .slide { padding: 40px 24px; }
+    .grid, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Capa -->
+<div class="slide cover">
+  <div class="badge">ECOMMERCE WHITE LABEL</div>
+  <h1>Sua loja online<br>em horas, não meses.</h1>
+  <p class="tagline">Plataforma de ecommerce reutilizável. Layout profissional, checkout funcional, painel administrativo completo. Pronta para personalizar e entregar ao cliente.</p>
+  <div class="grid grid-4" style="margin-top: 48px;">
+    <div class="metric"><div class="value">16</div><div class="label">Tabelas</div></div>
+    <div class="metric"><div class="value">7</div><div class="label">Páginas Loja</div></div>
+    <div class="metric"><div class="value">7</div><div class="label">Páginas Admin</div></div>
+    <div class="metric"><div class="value">100%</div><div class="label">Responsivo</div></div>
+  </div>
+</div>
+
+<!-- Slide 2: O Problema -->
+<div class="slide white">
+  <p class="tag tag-purple" style="margin-bottom:12px">OPORTUNIDADE</p>
+  <h2>Pequenos negócios precisam vender online.</h2>
+  <p>Lojas de bairro, Instagram shops, marcas independentes — todos precisam de um ecommerce profissional. Mas as opções são caras, complexas ou genéricas demais.</p>
+  <div class="grid-2 grid" style="margin-top: 28px;">
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>Plataformas caras</h3>
+      <p>Shopify cobra mensalidade + taxas. Nuvemshop limita personalização. Ambas comem margem de pequenos negócios.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔧</div>
+      <h3>Alternativas complexas</h3>
+      <p>WooCommerce e soluções open-source exigem conhecimento técnico, manutenção constante e tempo que o lojista não tem.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⏱️</div>
+      <h3>Desenvolvimento lento</h3>
+      <p>Cada projeto de ecommerce leva semanas ou meses. Refazer catálogo, checkout e painel do zero a cada cliente é inviável.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>Templates genéricos</h3>
+      <p>Templates de mercado passam sensação amadora. O cliente quer uma loja que pareça feita sob medida para a marca dele.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: A Solução -->
+<div class="slide dark">
+  <p class="tag tag-blue" style="margin-bottom:12px;background:rgba(99,102,241,0.15);color:#a5b4fc">SOLUÇÃO</p>
+  <h2>Uma plataforma. Múltiplos clientes.</h2>
+  <p>Em vez de começar cada projeto do zero, você parte de uma base profissional pronta — e só personaliza o que muda de cliente para cliente.</p>
+  <div class="grid" style="margin-top: 28px;">
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Entrega em horas</h3>
+      <p>Troque nome, cores e logo. Conecte o domínio. A loja está no ar.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔄</div>
+      <h3>Reutilizável</h3>
+      <p>Mesma base de código atende loja de roupa, semijoia, cosmético, doce, acessório.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💎</div>
+      <h3>Visual premium</h3>
+      <p>Design profissional que transmite confiança. Não parece template — parece produto.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Responsivo nativo</h3>
+      <p>Funciona perfeitamente no celular, tablet e desktop. Mobile-first.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💳</div>
+      <h3>PIX nativo</h3>
+      <p>Checkout com PIX funcional sem depender de gateway. 5% de desconto automático.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Painel admin</h3>
+      <p>Gerencie produtos, pedidos e categorias. Dashboard com métricas em tempo real.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Como Funciona -->
+<div class="slide white">
+  <p class="tag tag-green" style="margin-bottom:12px">PROCESSO</p>
+  <h2>Do contrato ao deploy em 4 passos.</h2>
+  <div style="margin-top: 28px;">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Briefing da marca</h3>
+        <p>Cliente informa nome, logo, cores, redes sociais, chave PIX e domínio.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Personalização</h3>
+        <p>3 arquivos de configuração são editados com os dados da marca. Logos e favicons trocados.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Cadastro de produtos</h3>
+        <p>Cliente cadastra produtos, fotos, preços e estoque pelo painel admin intuitivo.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Deploy e entrega</h3>
+        <p>Domínio configurado, SSL ativo, loja no ar. Cliente recebe acesso ao painel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Nichos -->
+<div class="slide light">
+  <p class="tag tag-blue" style="margin-bottom:12px">NICHOS ATENDIDOS</p>
+  <h2>Funciona para qualquer produto físico.</h2>
+  <p>A plataforma é genérica por design — categorias, produtos, variações e checkout se adaptam a qualquer nicho.</p>
+  <div class="grid" style="margin-top: 28px;">
+    <div class="card">
+      <div class="icon">💍</div>
+      <h3>Semijoias</h3>
+      <p>Catálogo com variações de tamanho e cor. Fotos profissionais. Checkout PIX.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👗</div>
+      <h3>Moda</h3>
+      <p>Variantes por cor e tamanho. Coleções por categoria. Lookbook na home.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🍰</div>
+      <h3>Doces & Confeitaria</h3>
+      <p>Pedidos com observações. PIX na hora. Encomendas com data de entrega.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💄</div>
+      <h3>Cosméticos</h3>
+      <p>Catálogo com descrições ricas. Variação de fragrâncias. Cross-sell na home.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏠</div>
+      <h3>Decoração</h3>
+      <p>Produtos com dimensões. Cálculo de frete. Fotos em ambiente.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Instagram Shops</h3>
+      <p>Link na bio → loja completa. Checkout em 2 cliques. Integração com WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Diferenciais -->
+<div class="slide dark">
+  <p class="tag tag-purple" style="margin-bottom:12px;background:rgba(99,102,241,0.15);color:#a5b4fc">DIFERENCIAIS</p>
+  <h2>O que faz essa plataforma vender.</h2>
+  <div class="grid grid-2" style="margin-top: 28px;">
+    <div class="card">
+      <h3>🎨 Design que impressiona</h3>
+      <p>Interface profissional com animações suaves, skeleton loading, microinterações. O cliente sente que está comprando de uma marca premium.</p>
+    </div>
+    <div class="card">
+      <h3>⚡ Velocidade de entrega</h3>
+      <p>Loja nova no ar em horas, não semanas. Personalização em 3 arquivos. Deploy automatizado.</p>
+    </div>
+    <div class="card">
+      <h3>💰 Sem mensalidade</h3>
+      <p>O cliente paga uma vez pelo projeto. Não há taxa por venda, não há mensalidade da plataforma. Margem 100% do lojista.</p>
+    </div>
+    <div class="card">
+      <h3>🔒 Independência</h3>
+      <p>Código-fonte próprio. Nada de ficar preso a plataformas que mudam regras, aumentam preços ou limitam funcionalidades.</p>
+    </div>
+    <div class="card">
+      <h3>📱 Mobile-first</h3>
+      <p>70% das vendas online vêm do celular. Layout responsivo e menu hamburger garantem experiência perfeita em qualquer tela.</p>
+    </div>
+    <div class="card">
+      <h3>🧩 Modular</h3>
+      <p>Backend, loja e admin são independentes. Cada cliente recebe exatamente o que precisa. Nada de código desnecessário.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: Modelo Comercial -->
+<div class="slide white">
+  <p class="tag tag-green" style="margin-bottom:12px">MODELO DE NEGÓCIO</p>
+  <h2>Como você ganha dinheiro.</h2>
+  <div class="grid grid-2" style="margin-top: 28px;">
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>🎯 Venda do projeto</h3>
+        <p>Cobre um valor fixo por loja entregue. O cliente recebe a loja pronta, personalizada e no ar. Você entrega em horas e tem margem alta.</p>
+        <ul class="check-list">
+          <li>Setup inicial da loja</li>
+          <li>Personalização visual</li>
+          <li>Cadastro de produtos iniciais</li>
+          <li>Configuração de domínio e SSL</li>
+          <li>Treinamento do painel admin</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3>🔧 Manutenção e evolução</h3>
+        <p>Receita recorrente com suporte técnico, novas features e hospedagem. O cliente paga mensalmente para manter a loja no ar e receber melhorias.</p>
+        <ul class="check-list">
+          <li>Hospedagem VPS</li>
+          <li>Suporte técnico</li>
+          <li>Backup e segurança</li>
+          <li>Atualizações da plataforma</li>
+          <li>Novas integrações</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex; justify-content:center; gap:40px; margin-top: 20px;">
+    <div class="metric"><div class="value">1x</div><div class="label">Setup</div></div>
+    <div class="metric"><div class="value">12x</div><div class="label">Mensalidade</div></div>
+    <div class="metric"><div class="value">∞</div><div class="label">Escala</div></div>
+  </div>
+</div>
+
+<!-- Slide 8: CTA -->
+<div class="slide cover">
+  <div class="badge">VAMOS CONVERSAR?</div>
+  <h1 style="font-size:2.5rem">Pronto para vender<br>ecommerce como serviço?</h1>
+  <p class="tagline">Plataforma pronta. Base testada. Design premium. Só falta o cliente.</p>
+  <div style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <a href="https://wa.me/5524998574876" style="background:#25D366;color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;font-size:0.95rem;display:inline-flex;align-items:center;gap:8px;">💬 WhatsApp</a>
+    <a href="https://igordev-portfolio-ofc.netlify.app" style="background:rgba(255,255,255,0.1);color:#fff;padding:14px 28px;border-radius:50px;font-weight:500;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.15);display:inline-flex;align-items:center;gap:8px;">🚀 Portfólio</a>
+    <a href="https://instagram.com/igor_devofc" style="background:rgba(255,255,255,0.1);color:#fff;padding:14px 28px;border-radius:50px;font-weight:500;text-decoration:none;font-size:0.95rem;border:1px solid rgba(255,255,255,0.15);display:inline-flex;align-items:center;gap:8px;">📷 Instagram</a>
+  </div>
+  <p class="footer-note">igorlaurindo49@gmail.com &nbsp;|&nbsp; github.com/Igorls34/ecommerce-platform</p>
+</div>
+
+</body>
+</html>

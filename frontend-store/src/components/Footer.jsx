@@ -34,7 +34,7 @@ export function Footer() {
       </div>
 
       <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
-        <a href="https://wa.me/5524992241855?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce." target="_blank" rel="noreferrer"
+        <a href="https://wa.me/5524998574876?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce." target="_blank" rel="noreferrer"
           className="btn btn-sm d-flex align-items-center gap-2 shadow"
           style={{ background: '#25D366', color: '#fff', borderRadius: 50, padding: '10px 18px', fontWeight: 600, fontSize: '0.85rem' }}>
           💬 Falar com o Dev

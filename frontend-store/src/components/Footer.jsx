@@ -37,7 +37,7 @@ export function Footer() {
         position: 'fixed', bottom: 24, right: 24, zIndex: 1000,
         display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end'
       }}>
-        <a href="https://wa.me/5524998574876?text=Olá!%20Vi%20seu%20trabalho%20no%20white-label%20ecommerce."
+        <a href="https://wa.me/5524998574876?text=Ol%C3%A1%20Igor!%20Gostei%20do%20seu%20trabalho%20com%20o%20white-label%20ecommerce.%20Quero%20saber%20mais."
           target="_blank" rel="noreferrer"
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,

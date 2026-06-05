@@ -45,7 +45,7 @@ export function Footer() {
           🚀 Portfólio
         </a>
       </div>
-      </div>
+
     </footer>
   );
 }

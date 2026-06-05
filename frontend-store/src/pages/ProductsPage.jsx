@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { getStoreProducts, getStoreCategories } from '../services/api';
 import { ProductCard } from '../components/ProductCard';
+import { ProductCardSkeleton } from '../components/Skeleton';
 
 const PER_PAGE = 8;
 
@@ -62,7 +63,13 @@ export function ProductsPage() {
       </div>
 
       {loading ? (
-        <div className="text-center py-5"><div className="spinner-border" /></div>
+        <div className="row g-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="col-6 col-md-4 col-lg-3" style={{ animation: `fade-in-up 0.4s cubic-bezier(0.16,1,0.3,1) ${i * 0.05}s both` }}>
+              <ProductCardSkeleton />
+            </div>
+          ))}
+        </div>
       ) : (
         <>
           <div className="row g-4">

@@ -15,9 +15,9 @@ export const brand = {
   apiUrl: 'https://api.exemplo.com.br',
 
   email: {
-    contact: 'contato@exemplo.com.br',
-    orders: 'pedidos@exemplo.com.br',
-    noReply: 'noreply@exemplo.com.br',
+    contact: 'igorlaurindo49@gmail.com',
+    orders: 'igorlaurindo49@gmail.com',
+    noReply: 'igorlaurindo49@gmail.com',
   },
 
   phone: {

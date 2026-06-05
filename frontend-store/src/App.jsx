@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { DemoBanner } from './components/DemoBanner';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
@@ -37,6 +38,7 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
+      <DemoBanner />
     </div>
   );
 }

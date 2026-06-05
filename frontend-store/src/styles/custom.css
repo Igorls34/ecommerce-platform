@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --c-black: #0a0a0a;
-  --c-dark: #171717;
-  --c-gray: #737373;
-  --c-light: #f5f5f5;
+  --c-black: #0f172a;
+  --c-dark: #1e293b;
+  --c-gray: #64748b;
+  --c-light: #f1f5f9;
   --c-white: #fff;
-  --c-border: rgba(0,0,0,0.06);
+  --c-border: rgba(0,0,0,0.05);
+  --c-accent: #6366f1;
   --radius: 16px;
   --radius-sm: 12px;
   --shadow: 0 1px 2px rgba(0,0,0,0.04);
@@ -16,7 +17,7 @@
 }
 
 * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-body { background: #fafafa; color: var(--c-dark); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background: #f8fafc; color: var(--c-dark); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 @keyframes skeleton-shimmer {
   0% { background-position: -200% 0; }
@@ -72,7 +73,7 @@ body { background: #fafafa; color: var(--c-dark); -webkit-font-smoothing: antial
 .btn-sm { padding: 7px 14px; font-size: 0.8rem; border-radius: 10px; }
 
 .hero {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
   color: #fff; padding: 140px 0 120px; position: relative; overflow: hidden;
 }
 .hero::after {
@@ -123,7 +124,7 @@ body { background: #fafafa; color: var(--c-dark); -webkit-font-smoothing: antial
 .spinner-border { color: var(--c-black) !important; border-width: 0.15em; }
 
 .footer {
-  background: #0a0a0a; color: rgba(255,255,255,0.45); padding: 72px 0 36px; margin-top: 80px;
+  background: #0f172a; color: rgba(255,255,255,0.45); padding: 72px 0 36px; margin-top: 80px;
 }
 .footer h5 { color: #fff; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 20px; }
 .footer a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: color 0.15s var(--ease); }

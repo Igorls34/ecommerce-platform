@@ -8,5 +8,5 @@ export const brand = {
   adminUrl: 'https://admin.exemplo.com.br',
   storeUrl: 'http://localhost:5600',
   phone: { store: '5500000000000', display: '(00) 00000-0000' },
-  colors: { primary: '#111', primaryDark: '#000' },
+  colors: { primary: '#0f172a', primaryDark: '#1e293b' },
 };

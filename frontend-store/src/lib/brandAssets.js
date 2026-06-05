@@ -32,10 +32,16 @@ export const brand = {
   },
 
   colors: {
-    primary: '#111111',
-    primaryDark: '#000000',
-    accent: '#666666',
-    background: '#fafafa',
+    primary: '#0f172a',
+    primaryDark: '#1e293b',
+    accent: '#6366f1',
+    background: '#f8fafc',
+  },
+
+  seo: {
+    ogImage: '/brand/og-logo-blue.png',
+    themeColor: '#0f172a',
+    backgroundColor: '#f8fafc',
   },
 
   pix: {

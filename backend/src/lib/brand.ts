@@ -25,10 +25,10 @@ export const brand = {
   },
 
   colors: {
-    primary: '#0d6efd',
-    primaryDark: '#0b5ed7',
-    accent: '#ffc107',
-    background: '#f8f9fa',
+    primary: '#0f172a',
+    primaryDark: '#1e293b',
+    accent: '#6366f1',
+    background: '#f8fafc',
   },
 
   payment: {
